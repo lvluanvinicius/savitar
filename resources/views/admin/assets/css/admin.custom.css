@@ -1,0 +1,75 @@
+.btn-action-table {
+    background: none;
+    border: none;
+}
+
+.btn-action-tabl:focus {
+    outline: none;
+}
+
+.actions-buttons-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Tables ------------------------------ */
+table, th, td {
+    border-left: none!important;
+    border-right: none!important;
+}
+
+table tr {
+    font-size: .9rem;
+}
+
+ /* End tables ------------------------- */
+
+/* Start profile -------------------------*/
+ .h-divider-list-token{
+    margin-top:8px;
+    margin-bottom:8px;
+    height:1px;
+    width:50%;
+    border-top:1px solid rgba(128, 128, 128, 0.1);
+}
+
+.btn-generated-key-profile {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+}
+.btn-generated-key-profile:focus {
+    outline: none;
+}
+/* End profile -------------------------*/
+
+
+/* Start Tables Users adn Othes ----*/
+.btn-actions-table-group {
+    display: flex;
+    justify-content: right;
+}
+
+.btn-actions-tables {
+    background: #30353b;
+    color: whitesmoke;
+    font-size: .8rem;
+    border: none;
+    padding: 4px 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+}
+
+.btn-actions-table-group div:nth-child(even) {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-action-table i {
+    margin-left: 10px;
+}
