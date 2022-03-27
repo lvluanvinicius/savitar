@@ -39,4 +39,12 @@ if (!function_exists("convetDateCreated")) {
     }
 }
 
+if (!function_exists("convetDateString")) {
+    function convetDateString($datetime) {
+        $dtStart = new DateTime($datetime);
+
+        return $dtStart->format('d/m/y H:i');
+    }
+}
+
 

@@ -43,7 +43,6 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route("app.home");
     }
-
     return view("index.login")->with(["title" => "Login | " . env("APP_NAME")]);
 })->name("login");
 
@@ -78,11 +77,17 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             // UserController
             Route::get("users", [App\Http\Controllers\Admin\UserController::class, "listusers"])->name('admin.users');
             Route::get("users-list-one", [\App\Http\Controllers\Admin\UserController::class, "listondeuser"])->name("admin.list.onde.user");
-
-            // UserController
             Route::put("add-new-user", [\App\Http\Controllers\Admin\UserController::class, "adduser"])->name("admin.new.user");
             Route::put("user-edit", [App\Http\Controllers\Admin\UserController::class, "edituser"])->name('admin.user.edit');
+            Route::put("user-update-permissions", [App\Http\Controllers\Admin\UserController::class, "updatepermissions"])->name('admin.user.update.permissions');
             Route::delete("user-delete", [App\Http\Controllers\Admin\UserController::class, "deleteuser"])->name('admin.user.delete');
+
+            // UsersGroupController
+            Route::get("group-users", [App\Http\Controllers\Admin\UsersGroupController::class, "index"])->name('admin.users.group');
+            Route::get("group-users-edit", [App\Http\Controllers\Admin\UsersGroupController::class, "show"])->name('admin.users.group.store');
+            Route::put("group-users-update", [App\Http\Controllers\Admin\UsersGroupController::class, "create"])->name('admin.users.group.create');
+            Route::patch("group-users-update", [App\Http\Controllers\Admin\UsersGroupController::class, "update"])->name('admin.users.group.update');
+            Route::delete("group-users-delete", [App\Http\Controllers\Admin\UsersGroupController::class, "destroy"])->name('admin.users.group.delete');
         });
 
     });

@@ -22,7 +22,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         // dd($request->server());
-        if (checkNivel(auth()->user()->id) == 0 || checkNivel(auth()->user()->id) == 1) {
+        if (checkNivel(auth()->user()->id, "*") || checkNivel(auth()->user()->id, "update") && checkNivel(auth()->user()->id, "create")) {
             return $next($request);
         }
         return $this->error($this->getMessage("apierror", "ErrorUnauthorizedRoute"), 401);

@@ -118,31 +118,14 @@
 
                         <div class="form-group col-md-12">
                             <label for="">Permissões</label>
-                            <div class="row pl-5">
+                            <div class="row">
 
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-create" name="permissions[]" value="create" checked>
-                                    <label for="p-create">Create</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-update" name="permissions[]" value="update">
-                                    <label for="p-update">Update</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-write" name="permissions[]" value="write" checked>
-                                    <label for="p-write">Write</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-delete" name="permissions[]" value="delete">
-                                    <label for="p-delete">Delete</label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <input type="checkbox" class="form-check-input"  id="p-all" name="permissions[]" value="*">
-                                    <label for="p-all">Todas as permissões</label>
+                                <div class="form-group col-md-12">
+                                    <select name="group_users" class="form-control">
+                                        @foreach ($gusers as $group)
+                                            <option value="{{ $group->id }}">{{ $group->gname }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                             </div>

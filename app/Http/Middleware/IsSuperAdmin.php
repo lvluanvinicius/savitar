@@ -20,7 +20,7 @@ class IsSuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (checkNivel(auth()->user()->id) == 0) {
+        if (checkNivel(auth()->user()->id, "*")) {
             return $next($request);
         }
         return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"), 401);

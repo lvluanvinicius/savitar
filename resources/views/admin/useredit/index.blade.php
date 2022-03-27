@@ -2,7 +2,27 @@
 @section('title', $title)
 
 @section('content_header')
-    <h1>{{ $user->name }}</h1>
+    <div class="row">
+        <div class="col-md-7">
+            <h1>{{ $user->name }}</h1>
+        </div>
+
+        <div class="col-md-5">
+            @if (checkNivel($user->id, "*"))
+                <div>
+                    <h5>Super Administrador</h5>
+                </div>
+            @elseif (checkNivel($user->id, "update") && checkNivel($user->id, "create"))
+                <div>
+                    <h5>Administrador</h5>
+                </div>
+            @elseif (checkNivel($user->id, "read") && checkNivel($user->id, "write"))
+                <div>
+                    <h5>Utilizador</h5>
+                </div>
+            @endif
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -63,26 +83,14 @@
             @if (!is_null($keyuser))
 
                 <div class="card-header">
-                    <h3 class="card-title">Minha chave de acesso</h3>
+                    <h3 class="card-title">Chave de Acesso</h3>
                 </div>
 
                 <div class="card-body">
                     <div class="row">
 
                         <div class="col-md-12">
-                            <span><strong>Nome: </strong></span> {{ $keyuser->name }}
-                        </div>
-
-                        <div class="h-divider-list-token"></div>
-
-                        <div class="col-md-12">
                             <span><strong>Token:</strong> </span> {{ $keyuser->token }}
-                        </div>
-
-                        <div class="h-divider-list-token"></div>
-
-                        <div class="col-md-12">
-                            <span><strong>Criado:</strong> </span> {{ convetDateCreated($keyuser->created_at) }}
                         </div>
 
                         <div class="h-divider-list-token"></div>
@@ -131,6 +139,37 @@
             @endif
 
         </div>
+
+        {{-- Update Permission User --}}
+        <div class="card card-secondary">
+            <div class="card-header">
+                <h3 class="card-title">Atualizar Permissões</h3>
+            </div>
+
+            <div class="card-body">
+                <form  action="{{ route('admin.user.update.permissions', ['id_user' => $user->id]) }}" method="post">
+
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="">Permissões</label>
+                        <select name="group_users" class="form-control">
+                            <option selected value="">Selecione uma permissão</option>
+                            @foreach ($gusers as $group)
+                                <option value="{{ $group->id }}">{{ $group->gname }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn-generated-key-profile">Atualizar permissões</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        {{-- End Update Permission User --}}
     </div>
 </div>
 @stop
@@ -155,6 +194,11 @@
             // Retornar mensagem de informação.
             else if (status === "Info") {
                 toastr.info('{{ session("message") }}')
+            }
+
+            // Retornar mensagem de erro.
+            else if (status === "Error") {
+                toastr.error('{{ session("message") }}')
             }
 
             // Retornar uma mensagem de erro caso o tipo seja Error.

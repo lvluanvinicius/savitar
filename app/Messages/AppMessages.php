@@ -16,9 +16,15 @@ Trait AppMessages {
         "SuccessDeleteUser" => "Usuário excluído com sucessso.",
         "SuccessUpdatedUser" => "Usuário atualizado com sucesso.",
         "SuccessAddUser" => "Usuário criado com sucesso.",
+        "SuccessUpdatedUserPermission" => "Permissões atualizadas com sucesso.",
 
         // Apis Keys
         "SuccessDeleteApiKey" => "Chave deletada com sucesso",
+
+        // Users Group
+        "SuccessAddUserGroup" => "Grupo criado com sucesso.",
+        "SuccessDeleteUserGroup" => "Grupo de Usuário excluído com sucesso.",
+        "SuccessUpdateUserGroup" => "Grupo de Usuário atualizado com sucesso.",
     ];
 
      /**
@@ -44,6 +50,18 @@ Trait AppMessages {
         "ErrorUnauthorizedRouteUpdateUser" => "Você não possui permissão para atualizar usuários.",
         "ErrorUnauthorizedRouteDeleteUser" => "Você não possui permissão para excluír usuários.",
         "ErrorSelectedPermissions" => "Selecione as permissões para esse usuário.",
+        "ErrorUpdatedPermissionsSelected" => "Você precisa selecionar uma permissão antes.",
+
+        // Users Group
+        "ErrorPermissionNotInformed" => "Selecione ao menos uma permissão para esse grupo.",
+        "ErrorAddGroup" => "Houve um erro ao tentar criar o grupo de usuários.",
+        "ErrorNotExcludeUserGroup" => "Erro ao tentar excluír esse grupo de usuário.",
+        "ErrorNotPossibleExcludeUserGroup" => "Não foi possível excluir esse grupo de usuário ou não foi encontrado.",
+        "ErrorUnauthorizedRouteCreateGroup" => "Você não possui permissão para adicionar novos grupos de usuários.",
+        "ErrorUnauthorizedRouteUpdateGroup" => "Você não possui permissão para atualizar grupos de usuários.",
+        "ErrorUnauthorizedRouteDeleteGroup" => "Você não possui permissão para excluír grupos de usuários.",
+        "ErrorUpdateGroup" => "Não foi possível atualizar esse grupo de usuário ou não foi encontrado.",
+
 
         // Exception
         "ErrorException" => "Houve um erro ao tentar salvar o usuário.",

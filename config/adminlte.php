@@ -260,6 +260,11 @@ return [
             'route'  => 'admin.apis.list',
             'icon' => 'fas fa-fw fa-key',
         ],
+        [
+            'text' => 'gpusers',
+            'route'  => 'admin.users.group',
+            'icon' => 'fas fa-fw fa-users-cog',
+        ],
 
         ['header' => 'account_settings'],
         [

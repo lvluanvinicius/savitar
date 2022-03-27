@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ApiKeys;
+use App\Models\GroupsRelated;
 use App\models\User;
+use App\Models\UsersGroups;
 use Illuminate\Http\Request;
 use App\Traits\AppResponse;
 use App\Traits\LoadMessages;
@@ -26,7 +28,7 @@ class UserController extends Controller
         /**
          * Verificar permissão de acesso do usuário que está tentando manipular.
          */
-        if (!checkNivel(auth()->user()->id) == 0) {
+        if (!checkNivel(auth()->user()->id, "*")) {
             return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
         }
 
@@ -64,6 +66,32 @@ class UserController extends Controller
         }
     }
 
+    public function updatepermissions(Request $request) {
+        /**
+         * Verificar permissão de acesso do usuário que está tentando manipular.
+         */
+        if (!checkNivel(auth()->user()->id, "*")) {
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
+        }
+
+        if (is_null($request->group_users)) {
+            return $this->error($this->getMessage("apperror", "ErrorUpdatedPermissionsSelected"), $code=400);
+        }
+
+        try {
+            $grouprelated = GroupsRelated::where("id_user", $request->id_user)->first();
+            $grouprelated->id_group_users = $request->group_users;
+            $grouprelated->save();
+
+            //dd($grouprelated);
+
+            return $this->success($this->getMessage("appsuccess", "SuccessUpdatedUserPermission"),  $code=200);
+
+        } catch(Exception $e) {
+            return $this->error($this->getMessage("apperror", "ErrorException"),  $code=400);
+        }
+    }
+
     /**
      * Load user from edit,
      *
@@ -75,10 +103,12 @@ class UserController extends Controller
         $id_user = $request->all('id');
         $user = User::where('id', $id_user)->first();
         $key = ApiKeys::where("tokenable_id", $id_user)->first();
+        $gusers = UsersGroups::get();
 
         return view('admin.useredit.index')->with([
             "title" => "$user->name | " . env('APP_NAME'),
             "user" => $user,
+            "gusers" => $gusers,
             "keyuser" => $key
         ]);
     }
@@ -131,7 +161,7 @@ class UserController extends Controller
      */
     public function adduser(Request $request)
     {
-        if (!checkNivel(auth()->user()->id) == 0) {
+        if (!checkNivel(auth()->user()->id, "*")) {
             return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
         }
 
@@ -147,26 +177,25 @@ class UserController extends Controller
             return $this->error($this->getMessage("apperror", "ErrorShortPassword"),  $code=400);
         }
 
-        //permissions
-        if (is_null($request->permissions)) {
-            return $this->error($this->getMessage("apperror", "ErrorSelectedPermissions"),  $code=400);
-        }
-
         if ($request->confirm_add_user != "on") {
             return $this->error($this->getMessage("apperror", "ErrorAddChange"),  $code=400);
         }
 
         try {
 
-            //
-
             $user = new User();
+            $grouprelated = new GroupsRelated();
 
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-
+            $user->last_access_login = date('Y-m-d H:i:s');
             $user->save();
+
+            $grouprelated->id_group_users = $request->group_users;
+            $grouprelated->id_user = $user->id;
+
+            $grouprelated->save();
 
             return $this->success($this->getMessage("appsuccess", "SuccessAddUser"),  $code=200);
 
@@ -210,10 +239,12 @@ class UserController extends Controller
     public function listusers(Request $request)
     {
         $users = User::where("id", "!=", auth()->user()->id)->get();
+        $gusers = UsersGroups::get();
 
         return view('admin.users.index')->with([
             "title" => "Usuários | ". env('APP_NAME'),
             "users" => $users,
+            "gusers" => $gusers,
             "subtitle" => "Usuários"
         ]);
     }
@@ -229,7 +260,7 @@ class UserController extends Controller
         /**
          * Verificar permissão de acesso do usuário que está tentando manipular.
          */
-        if (!checkNivel(auth()->user()->id) == 0) {
+        if (!checkNivel(auth()->user()->id, "*")) {
             return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
         }
 

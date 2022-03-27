@@ -20,4 +20,5 @@ return [
     'users'                             => "Usuários",
     'apis'                             => "Chaves de acesso",
     'my_key'                             => "Minha chave",
+    "gpusers"                       => "Grupo de Usuários"
 ];

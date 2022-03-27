@@ -13,82 +13,80 @@
 @stop
 
 @section('content')
-    @if (checkNivel(auth()->user()->id) != -1)
-        @if ( checkNivel(auth()->user()->id) == 0 || checkNivel(auth()->user()->id) == 1)
-            <section>
-                <div class="row pt-3">
+    @if (checkNivel(auth()->user()->id, "*") || checkNivel(auth()->user()->id, "dash"))
+        <section>
+            <div class="row pt-3">
 
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $qnt_users }}</h3>
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $qnt_users }}</h3>
 
-                            <p>Usuários cadastrados.</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <a href="{{ route('admin.users') }}" class="small-box-footer">
-                            Ver mais <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                        </div>
+                        <p>Usuários cadastrados.</p>
                     </div>
-
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>{{ $qnt_keys }}</h3>
-
-                            <p>Chaves cadastradas.</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                        </div>
+                    <div class="icon">
+                        <i class="fas fa-user-plus"></i>
                     </div>
-
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Chaves cadastradas.</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                        </div>
+                    <a href="{{ route('admin.users') }}" class="small-box-footer">
+                        Ver mais <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                     </div>
-
-                    <div class="col-lg-3 col-6">
-                        <!-- small card -->
-                        <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Chaves cadastradas.</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                        </div>
-                    </div>
-
                 </div>
-            </section>
-        @endif
+
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $qnt_keys }}</h3>
+
+                        <p>Chaves cadastradas.</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>Chaves cadastradas.</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>Chaves cadastradas.</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <a href="{{ route('admin.apis.list') }}" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     @endif
 @stop
 

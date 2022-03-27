@@ -18,6 +18,9 @@ use App\Http\Controllers\Api\ {
 */
 
 Route::middleware('auth:sanctum')->post('/user', function (Request $request) {
+    if (!checkNivel(auth()->user()->id, "read")) {
+        return "erro de permissão";
+    }
     return json_encode(["teste" => auth()->user()]);
 });
 

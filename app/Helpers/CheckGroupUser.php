@@ -12,36 +12,19 @@ use App\Models\UsersGroups;
  */
 
 if (!function_exists("checkNivel")) {
-    function checkNivel($iduser) {
+    function checkNivel($iduser, $permission) {
         try {
             $related = GroupsRelated::where('id_user', $iduser)->first(); // Buscar relacionamento de Grupo e Usuário;
             $group = UsersGroups::where('id', $related->id_group_users)->first(); // Buscar permissões do usuário;
+
+            if (str_contains($group->permissions, $permission)) {
+                return true;
+            }
+
+            return false;
+
         } catch(Exception $e) {
-            return -1;
-        }
-
-        // Todas as permissoes;
-        if (str_contains($group->permissions, "*"))
-        {
-            return 0;
-        }
-        // Read And Updated
-        elseif (str_contains($group->permissions, "read") && str_contains($group->permissions, "write") &&
-            str_contains($group->permissions, "update") && str_contains($group->permissions, "create"))
-        {
-            return 1;
-        }
-
-        // Read and Write
-        elseif (str_contains($group->permissions, "read") &&
-            str_contains($group->permissions, "write"))
-        {
-            return 2;
-        }
-
-        else // Retorna para ser executada uma ação de logout, pois não há permissão válida.
-        {
-            return -1;
+            dd("Houve um erro ao tentar ler as permissões desse usuário.");
         }
     }
 }
