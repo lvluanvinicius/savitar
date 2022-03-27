@@ -23,7 +23,6 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Tipo</th>
-                                <th>Ações</th>
                                 <th>Ultima utilização</th>
                                 <th>Criado</th>
                                 <th></th>
@@ -35,7 +34,6 @@
                                 <tr>
                                     <td>{{ $apikey->name }}</td>
                                     <td>{{ $apikey->tokenable_type }}</td>
-                                    <td>{{ $apikey->abilities }}</td>
                                     <td>{{ convetDate($apikey->last_used_at) }}</td>
                                     <td>{{ convetDateCreated($apikey->created_at) }}</td>
                                     <td>

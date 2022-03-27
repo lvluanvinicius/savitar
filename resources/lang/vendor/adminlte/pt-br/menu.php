@@ -20,5 +20,6 @@ return [
     'users'                             => "Usuários",
     'apis'                             => "Chaves de acesso",
     'my_key'                             => "Minha chave",
-    "gpusers"                       => "Grupo de Usuários"
+    "gpusers"                       => "Grupo de Usuários",
+    "exit"                       => "Sair"
 ];

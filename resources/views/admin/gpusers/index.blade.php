@@ -60,6 +60,11 @@
                                 </div>
 
                                 <div class="col-md-2">
+                                    <input type="checkbox" class="form-check-input"  id="p-read" name="permissions[]" value="read" >
+                                    <label for="p-read">Read</label>
+                                </div>
+
+                                <div class="col-md-2">
                                     <input type="checkbox" class="form-check-input"  id="p-write" name="permissions[]" value="write" >
                                     <label for="p-write">Write</label>
                                 </div>

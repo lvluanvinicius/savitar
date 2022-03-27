@@ -18,7 +18,7 @@ class UserController extends Controller
     use AppResponse, LoadMessages;
 
    /**
-    * Edit User Method
+    * Edit User Method.
     *
     * @param Request $request
     * @return void
@@ -66,6 +66,12 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Atualização de permissões para usuários.
+     *
+     * @param Request $request
+     * @return void
+     */
     public function updatepermissions(Request $request) {
         /**
          * Verificar permissão de acesso do usuário que está tentando manipular.
@@ -93,7 +99,7 @@ class UserController extends Controller
     }
 
     /**
-     * Load user from edit,
+     * Edição de usuários.
      *
      * @param Request $request
      * @return void
@@ -214,6 +220,7 @@ class UserController extends Controller
      * Retorna a página de usuários já com os dados carregados.
      *  Não retorna o usuário logado.
      *  - A atualização do próprio usuário, é necessário estar logado e realizar pela página Profile.
+     *
      * @param Request $request
      * @return void
      */
@@ -266,11 +273,16 @@ class UserController extends Controller
 
         if (is_numeric($request->id)) {
             $user = User::where("id", $request->id)->first();
+            $related = GroupsRelated::where("id_user", $request->id)->first();
+
             try {
-                if ($user->delete()) {
-                    return $this->success($this->getMessage("appsuccess", "SuccessDeleteUser"), $code=200);
+                if ($related->delete()) {
+                    if ($user->delete()) {
+                        return $this->success($this->getMessage("appsuccess", "SuccessDeleteUser"), $code=200);
+                    }
                 }
             } catch (Exception $e) {
+                dd($e);
                 return $this->error($this->getMessage("apperror", "ErrorNotExcludeUser"),  $code=400);
             }
             return $this->error($this->getMessage("apperror", "ErrorNotExcludeUser"),  $code=400);

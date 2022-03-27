@@ -6,21 +6,8 @@
         <div class="col-md-7">
             <h1>{{ $user->name }}</h1>
         </div>
-
         <div class="col-md-5">
-            @if (checkNivel($user->id, "*"))
-                <div>
-                    <h5>Super Administrador</h5>
-                </div>
-            @elseif (checkNivel($user->id, "update") && checkNivel($user->id, "create"))
-                <div>
-                    <h5>Administrador</h5>
-                </div>
-            @elseif (checkNivel($user->id, "read") && checkNivel($user->id, "write"))
-                <div>
-                    <h5>Utilizador</h5>
-                </div>
-            @endif
+            <h5>{{ loadGroupUser($user->id) }}</h5>
         </div>
     </div>
 @stop

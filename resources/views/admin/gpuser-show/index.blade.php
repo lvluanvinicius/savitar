@@ -2,7 +2,7 @@
 @section('title', $title)
 
 @section('content_header')
-<h1>teste</h1>
+<h1>{{ $gpuser->gname }}</h1>
 @stop
 
 @section('css')
@@ -47,6 +47,11 @@
                                     <div class="col-md-2">
                                         <input type="checkbox" class="form-check-input"  id="p-update" name="permissions[]" value="update">
                                         <label for="p-update">Update</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-read" name="permissions[]" value="read" >
+                                        <label for="p-read">Read</label>
                                     </div>
 
                                     <div class="col-md-2">

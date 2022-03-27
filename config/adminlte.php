@@ -47,7 +47,7 @@ return [
 
     // 'logo' => '<b>Zabbix</b> API',
     'logo' => env('APP_NAME'),
-    'logo_img' => 'assets/admin/img/api.png',
+    'logo_img' => asset("assets/admin/img/api.png"),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -147,7 +147,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -168,11 +168,11 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
-    'right_sidebar_push' => true,
+    'right_sidebar_push' => false,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
@@ -188,14 +188,14 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => '/app/home',
-    'logout_url' =>  "/app/logout", // 'logout',
-    'login_url' => 'login-auth',
-    'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'use_route_url' => true,
+    'dashboard_url' => 'app.home',
+    'logout_url' =>  "app.logout", // 'logout',
+    'login_url' => "login.auth",
+    'register_url' => false,
+    'password_reset_url' => false,
+    'password_email_url' => false,
+    'profile_url' => "app.profile",
 
     /*
     |--------------------------------------------------------------------------
@@ -255,15 +255,17 @@ return [
             'route'  => 'admin.users',
             'icon' => 'fas fa-fw fa-users',
         ],
-        [
-            'text' => 'apis',
-            'route'  => 'admin.apis.list',
-            'icon' => 'fas fa-fw fa-key',
-        ],
+
         [
             'text' => 'gpusers',
             'route'  => 'admin.users.group',
             'icon' => 'fas fa-fw fa-users-cog',
+        ],
+
+        [
+            'text' => 'apis',
+            'route'  => 'admin.apis.list',
+            'icon' => 'fas fa-fw fa-key',
         ],
 
         ['header' => 'account_settings'],
@@ -273,7 +275,9 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
 
-        ['header' => 'Outros'],
+        // ['header' => 'Outros'],
+
+
     ],
 
     /*
