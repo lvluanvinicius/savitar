@@ -47,7 +47,7 @@ return [
 
     // 'logo' => '<b>Zabbix</b> API',
     'logo' => env('APP_NAME'),
-    'logo_img' => asset("assets/admin/img/api.png"),
+    'logo_img' => "assets/admin/img/api.png",
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
