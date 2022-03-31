@@ -29,6 +29,9 @@
         "files": [
             "app/Helpers/Manipuledate.php",
             "app/Helpers/CheckGroupUser.php"
+        ],
+        "classmap": [
+            "app/Libs"
         ]
     },
     "autoload-dev": {

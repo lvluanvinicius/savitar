@@ -21,10 +21,16 @@ Trait ApiMessages {
      * @var array
      */
     private $apierror = [
+        /// AuthController
         "ErrorLoginNotAssoc" => "Usuário ou senha incorretos.",
         "ErrorLoginNotInformed" => "Dados de autenticação não foram informados corretamente.",
         "ErrorUnauthorizedRoute" => "Você não tem permissão para acessar esse recurso.",
         "ErrorRevokeKeyUnauthorized" => "Você precisa estar logado para revogar sua chave de acesso.",
+
+
+        /// DatacomController
+        "ErrorTryingInitiateConnectionHost" => "Erro ao tentar iniciar uma conexão com o host.",
+        "ErrorSSHCredentials" => "Erro na autenticação. Usuário ou senha não confere."
     ];
 
     /**

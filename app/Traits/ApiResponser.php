@@ -39,7 +39,7 @@ trait ApiResponser
      * @param  array|string|null  $data
      * @return \Illuminate\Http\JsonResponse
      */
-	protected function error(string $message = null, int $code, $data = null)
+	protected function error(string $message = null, int $code = 400, $data = null)
 	{
 		return response()->json([
 			'status' => 'Error',
@@ -57,12 +57,13 @@ trait ApiResponser
      * @param [type] $data
      * @return void
      */
-    protected function info(string $message = null, string $troute, int $code, $data = null)
+    protected function info(string $message = null, string $troute, int $code = 200, $data = null)
 	{
-        return redirect()->route($troute)->with([
-            'status' => 'Info',
+        return response()->json([
+			'status' => 'Info',
 			'message' => $message,
-        ], $code)->withInput();
+			'data' => $data
+		], $code);
 	}
 
     /**
@@ -74,12 +75,13 @@ trait ApiResponser
      * @param [type] $data
      * @return void
      */
-    protected function warning(string $message = null, string $troute, int $code, $data = null)
+    protected function warning(string $message = null, string $troute, int $code = 200, $data = null)
 	{
-        return redirect()->route($troute)->with([
-            'status' => 'Warning',
+        return response()->json([
+			'status' => 'Warning',
 			'message' => $message,
-        ], $code)->withInput();
+			'data' => $data
+		], $code);
 	}
 
 }

@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ {
-    AuthController
-};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,26 +15,9 @@ use App\Http\Controllers\Api\ {
 |
 */
 
-Route::middleware('auth:sanctum')->post('/user', function (Request $request) {
-    if (!checkNivel(auth()->user()->id, "*") && !checkNivel(auth()->user()->id, "read")) {
-        return "erro de permissão";
-    }
-    return json_encode(["teste" => auth()->user()]);
-});
+/// Route Login...
+Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, "login"])->name("api.login");
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post("login-ssh", function (Request $request) {
-        return $request->all();
-    });
+    Route::post("ssh-load-pons", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"]);
 });
-
-
-Route::post('/login', [AuthController::class, "login"])->name("api.login");
-
-
-
-
-
-
-
-
