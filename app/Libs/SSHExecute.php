@@ -9,27 +9,32 @@ class SSHExecute {
 
     public function getInOLTPons($credentials)
     {
+
         // Instancia
         $ssh = new LibsSshLib();
 
+        // Buscando Host e Porta.
+        $splitHost = explode(":", $credentials->ip_host);
+
         // Conexão com o Host.
-        if (!$ssh->connect($credentials["ip_host"])) return "E00160";
+        if (!$ssh->connect($splitHost[0], $splitHost[1])) return "E00160";
 
         // Verificando se credencias são compatíveis.
-        if (!$ssh->authorizationPassword($credentials["username"], $credentials["password"])) return "E00161";
+        if (!$ssh->authorizationPassword($credentials->username, $credentials->password)) return "E00161";
 
         /**
          * Executar o comando de consulta.
          * Nesse exemplo, é realizado uma consulta em um arquivo armazenado no diretório /tmp.
          * Não há adaptação para consulta na OLT diretamente.
-         *
-         * Comando executado: cat /tmp/ssh_olt.txt
          */
-        $consult = $ssh->executeCommand("cat /tmp/ssh_olt.txt", $error);
+        $consult = $ssh->executeCommand("show interface gpon 1/1/$credentials->ponid onu", $error);
 
-        if($error) {
-            return "E00171";
-        }
+        /**
+         * Captura erro de saída e retorna um código para tratamento.
+         */
+        if($error) return "E00171";
+
+        if (\str_contains($consult, "syntax error")) return "E00172";
 
         return $consult;
 

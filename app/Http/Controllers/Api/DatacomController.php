@@ -16,17 +16,19 @@ class DatacomController extends Controller
     public function loadPons(Request $request)
     {
         // Consulta.
-        $sshConsult = $this->bridgeLoadPons($request->all());
+        $sshConsult = $this->bridgeLoadPons($request);
 
         // Se houver erro de comunicação.
-        if ($sshConsult == "E00160") {
-            return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
-        }
+        if ($sshConsult == "E00160") return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
 
         // Se houver erro de autenticação.
-        if ($sshConsult == "E00161") {
-            return $this->error($this->getMessage("apierror", "ErrorSSHCredentials"), 200);
-        }
+        if ($sshConsult == "E00161") return $this->error($this->getMessage("apierror", "ErrorSSHCredentials"), 200);
+
+        // Se houver erro na saída do comando.
+        if ($sshConsult == "E00171") return $this->error($this->getMessage("apierror", "ErrorStdOut"), 200);
+
+        // Se houve um erro de sintax no comando.
+        if ($sshConsult == "E00172") return $this->error($this->getMessage("apierror", "ErrorSintaxCommand"), 200);
 
         // Tratar dados...
         $sshArray = explode("\n", $sshConsult);
@@ -56,15 +58,11 @@ class DatacomController extends Controller
 
         // Dados de retorno.
         $responseStatus = [
-            "total" => $total,
             "totalUp"=> $TotalUp / $total * 100,
             "totalDown" => $TotalDown / $total * 100,
         ];
 
-        return $request->all();
-
         // Retornar resultado do processamento.
-        return $this->success($responseStatus, null);
-        // return json_encode($responseStatus);
+        return $this->success($responseStatus);
     }
 }

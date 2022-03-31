@@ -30,7 +30,9 @@ Trait ApiMessages {
 
         /// DatacomController
         "ErrorTryingInitiateConnectionHost" => "Erro ao tentar iniciar uma conexão com o host.",
-        "ErrorSSHCredentials" => "Erro na autenticação. Usuário ou senha não confere."
+        "ErrorSSHCredentials" => "Erro na autenticação. Usuário ou senha não confere.",
+        "ErrorStdOut" => "Houve um erro no processamento dos dados ou foi gerado um erro na saída da consulta.",
+        "ErrorSintaxCommand" => "Houve um erro de sintax ou o comando não é válido.",
     ];
 
     /**

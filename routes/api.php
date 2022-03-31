@@ -19,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, "login"])->name("api.login");
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post("ssh-load-pons", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"]);
+    Route::post("ssh-load-pons/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"]);
 });
