@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="">Permissões</label>
+                                <label for="">Ações</label>
                                 <div class="row pl-5">
 
                                     <div class="col-md-2">
@@ -64,17 +64,41 @@
                                         <label for="p-delete">Delete</label>
                                     </div>
 
+                                </div>
+
+                                <div class="h-divider-list-token"></div>
+                                <label for="">Páginas</label>
+                                <div class="row pl-5">
                                     <div class="col-md-2">
                                         <input type="checkbox" class="form-check-input"  id="p-dash" name="permissions[]" value="dash">
                                         <label for="p-dash">Dash</label>
                                     </div>
 
                                     <div class="col-md-2">
-                                        <input type="checkbox" class="form-check-input"  id="p-all" name="permissions[]" value="*">
-                                        <label for="p-all">All</label>
+                                        <input type="checkbox" class="form-check-input"  id="p-ulist" name="permissions[]" value="ulist">
+                                        <label for="p-ulist">Usuários</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-ugroup" name="permissions[]" value="ugroup">
+                                        <label for="p-ugroup">Grupos de Usuários</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-keyaccess" name="permissions[]" value="keyaccess">
+                                        <label for="p-keyaccess">Chaves de Acesso</label>
                                     </div>
 
                                 </div>
+
+                                <div class="h-divider-list-token"></div>
+                                <div class="row pl-5">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" class="form-check-input"  id="p-all" name="permissions[]" value="*">
+                                        <label for="p-all">Todas as Permissões</label>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>

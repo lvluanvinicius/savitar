@@ -7,10 +7,15 @@ use Error;
 
 class SSHExecute {
 
+    /**
+     * Método de consulta de pons.
+     * Retorna uma string da consulta
+     * @param Request $credentials
+     * @return string
+     */
     public function getInOLTPons($credentials)
     {
-
-        // Instancia
+        // Instancia de SSH Libs
         $ssh = new LibsSshLib();
 
         // Buscando Host e Porta.
@@ -29,6 +34,8 @@ class SSHExecute {
          */
         $consult = $ssh->executeCommand("show interface gpon 1/1/$credentials->ponid onu", $error);
 
+        $ssh->disconnection();
+
         /**
          * Captura erro de saída e retorna um código para tratamento.
          */
@@ -37,6 +44,46 @@ class SSHExecute {
         if (\str_contains($consult, "syntax error")) return "E00172";
 
         return $consult;
+    }
 
+    /**
+     * Método de consulta de pons.
+     * Retorna uma string da consulta
+     * OLT: Datacom
+     *
+     * @param Request $credentials
+     * @return string
+     */
+    public function discoveryPonsDatacom($credentials)
+    {
+        // Instancia de SSH Libs
+        $ssh = new LibsSshLib();
+
+        // Buscando Host e Porta.
+        $splitHost = explode(":", $credentials->ip_host);
+
+        // Conexão com o Host.
+        if (!$ssh->connect($splitHost[0], $splitHost[1])) return "E00160";
+
+        // Verificando se credencias são compatíveis.
+        if (!$ssh->authorizationPassword($credentials->username, $credentials->password)) return "E00161";
+
+        /**
+         * Executar o comando de consulta.
+         * Nesse exemplo, é realizado uma consulta em um arquivo armazenado no diretório /tmp.
+         * Não há adaptação para consulta na OLT diretamente.
+         */
+        $consult = $ssh->executeCommand("show interface gpon | nomore", $error); // dis pons
+
+        $ssh->disconnection();
+
+        /**
+         * Captura erro de saída e retorna um código para tratamento.
+         */
+        if($error) return "E00171";
+
+        if (\str_contains($consult, "syntax error")) return "E00172";
+
+        return $consult;
     }
 }

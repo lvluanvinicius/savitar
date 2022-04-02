@@ -1,8 +1,13 @@
 
 Códigos de erro:
-    :E00160 -> "Falha na comunicação com o host de destino."
-    :E00161 -> "Erro de credenciais."
-    :E00171 -> "Erro de saída STDERR."
-    :E00172 -> "Apresentado, quando a saída do comando, retorna erro de sintax."
+    :E00160 -> "Falha na comunicação com o host de destino";
+    :E00161 -> "Erro de credenciais";
+    :E00171 -> "Erro de saída STDERR";
+    :E00172 -> "Apresentado, quando a saída do comando, retorna erro de sintax"
 
 
+Permissões:
+    :dash -> "Permissão de acesso ao Dashboard";
+    :ulist -> "Permissão de acesso aos usuários";
+    :ugroup -> "Permissão de acesso ao Grupo de Usuários";
+    :keyaccess -> "Permissão de acesso a Chaves de Acesso.";

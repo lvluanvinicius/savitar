@@ -20,4 +20,5 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, "login"]
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post("ssh-load-pons/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"]);
+    Route::post("ssh-discovery-pons-datacom", [\App\Http\Controllers\Api\DatacomController::class, "discoveryPonsDatacom"]);
 });
