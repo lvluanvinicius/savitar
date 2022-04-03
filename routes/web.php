@@ -23,7 +23,7 @@ Route::get("tmp", function () {
 
     // $gp = new UsersGroups();
     // $gp->gname = "administrator";
-    // $gp->permissions = '["read","write"]';
+    // $gp->permissions = '["*"]';
     // $gp->save();
 
     // $related = new GroupsRelated();
@@ -32,8 +32,8 @@ Route::get("tmp", function () {
     // $related->save();
 
     // $user = new User();
-    // $user->name = "Administrador";
-    // $user->email = "admin@teste.com";
+    // $user->name = "Luan Santos";
+    // $user->email = "luan@teste.com";
     // $user->password = Hash::make("1234");
     // $user->last_access_login = date('Y-m-d H:i:s');
     // $user->save();
