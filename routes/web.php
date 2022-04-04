@@ -65,24 +65,27 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
     Route::put("user-relogin-api", [App\Http\Controllers\Admin\ApisController::class, "update"])->name('app.relogin.api');
 
     // Grupo de admin/rotas privadas.
-    Route::middleware('isadmin')->prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
 
-        // ApisController updatekeyfromusers
-        Route::get("users-apis-keys", [App\Http\Controllers\Admin\ApisController::class, "index"])->name('admin.apis.list');
-        Route::put("user-relogin-api-user", [App\Http\Controllers\Admin\ApisController::class, "updatekeyfromusers"])->name('app.relogin.api.user');
-        Route::delete("user-api-key", [App\Http\Controllers\Admin\ApisController::class, "destroy"])->name('admin.apis.delete');
+        // ApisController
+        Route::middleware("keypages")->group(function () {
+            Route::get("users-apis-keys", [App\Http\Controllers\Admin\ApisController::class, "index"])->name('admin.apis.list');
+            Route::put("user-relogin-api-user", [App\Http\Controllers\Admin\ApisController::class, "updatekeyfromusers"])->name('app.relogin.api.user');
+            Route::delete("user-api-key", [App\Http\Controllers\Admin\ApisController::class, "destroy"])->name('admin.apis.delete');
+        });
 
-        // Super Admin Group
-        Route::middleware("issuperadmin")->group(function () {
-            // UserController
+        // UserController
+        Route::middleware("userspage")->group(function () {
             Route::get("users", [App\Http\Controllers\Admin\UserController::class, "listusers"])->name('admin.users');
             Route::get("users-list-one", [\App\Http\Controllers\Admin\UserController::class, "listondeuser"])->name("admin.list.onde.user");
             Route::put("add-new-user", [\App\Http\Controllers\Admin\UserController::class, "adduser"])->name("admin.new.user");
             Route::put("user-edit", [App\Http\Controllers\Admin\UserController::class, "edituser"])->name('admin.user.edit');
             Route::put("user-update-permissions", [App\Http\Controllers\Admin\UserController::class, "updatepermissions"])->name('admin.user.update.permissions');
             Route::delete("user-delete", [App\Http\Controllers\Admin\UserController::class, "deleteuser"])->name('admin.user.delete');
+        });
 
-            // UsersGroupController
+        // UsersGroupController
+        Route::middleware("groupuserspage")->group(function () {
             Route::get("group-users", [App\Http\Controllers\Admin\UsersGroupController::class, "index"])->name('admin.users.group');
             Route::get("group-users-edit", [App\Http\Controllers\Admin\UsersGroupController::class, "show"])->name('admin.users.group.store');
             Route::put("group-users-update", [App\Http\Controllers\Admin\UsersGroupController::class, "create"])->name('admin.users.group.create');

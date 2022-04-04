@@ -7,7 +7,7 @@
             <h1>{{ $user->name }}</h1>
         </div>
         <div class="col-md-5">
-            <h5>{{ loadGroupUser($user->id) }}</h5>
+            <h5>Nível: {{ loadGroupUser($user->id) }}</h5>
         </div>
     </div>
 @stop

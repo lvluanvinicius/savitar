@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Pages;
 
 use App\Traits\AppResponse;
 use App\Traits\LoadMessages;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsSuperAdmin
+class UsersPage
 {
-    use AppResponse, LoadMessages;
+    use LoadMessages, AppResponse;
 
     /**
      * Handle an incoming request.
@@ -20,9 +20,9 @@ class IsSuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (checkNivel(auth()->user()->id, "*")) {
+        if (checkNivel(auth()->user()->id, "ulist") || checkNivel(auth()->user()->id, "*")) {
             return $next($request);
         }
-        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"), 401);
+        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
     }
 }

@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Pages;
 
-use App\Models\GroupsRelated;
 use App\Traits\AppResponse;
 use App\Traits\LoadMessages;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class KeyPages
 {
-    use AppResponse, LoadMessages;
-
+    use LoadMessages, AppResponse;
     /**
      * Handle an incoming request.
      *
@@ -21,10 +19,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd($request->server());
-        if (checkNivel(auth()->user()->id, "*") || checkNivel(auth()->user()->id, "update") && checkNivel(auth()->user()->id, "create")) {
+        if (checkNivel(auth()->user()->id, "keyaccess") || checkNivel(auth()->user()->id, "*")) {
             return $next($request);
         }
-        return $this->error($this->getMessage("apierror", "ErrorUnauthorizedRoute"), 401);
+        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
     }
 }

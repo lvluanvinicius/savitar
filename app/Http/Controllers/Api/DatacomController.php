@@ -25,7 +25,7 @@ class DatacomController extends Controller
     {
         // Consulta.
         $sshConsult = $this->bridgeLoadPons($request);
-
+        
         // Se houver erro de comunicação.
         if ($sshConsult == "E00160") return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
 
@@ -37,6 +37,9 @@ class DatacomController extends Controller
 
         // Se houve um erro de sintax no comando.
         if ($sshConsult == "E00172") return $this->error($this->getMessage("apierror", "ErrorSintaxCommand"), 200);
+        
+        // Retorna erro se nenhuma entrada for encontrada para o comando executado.
+        if ($sshConsult == "E00173") return $this->error($this->getMessage("apierror", "ErrorNoEntriesFound"), 200);
 
         // Tratar dados...
         $sshArray = explode("\n", $sshConsult);

@@ -37,12 +37,6 @@ class UsersGroupController extends Controller
      */
     public function create(Request $request)
     {
-         /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateGroup"), $code=400);
-        }
 
         if (strlen($request->gname) < 5) {
             return $this->error($this->getMessage("apperror", "ErrorInvalidError"),  $code=400);
@@ -66,6 +60,9 @@ class UsersGroupController extends Controller
             return $this->success($this->getMessage("appsuccess", "SuccessAddUserGroup"),  $code=200);
 
         } catch(Exception $e) {
+            if ($e->errorInfo[0] == "23000" && $e->errorInfo[1] == 1062) {
+                return $this->error($this->getMessage("apperror", "ErrorGroupUserAlreadyExists"),  $code=400);
+            }
             return $this->error($this->getMessage("apperror", "ErrorException"),  $code=400);
         }
 
@@ -119,12 +116,6 @@ class UsersGroupController extends Controller
      */
     public function update(Request $request)
     {
-        /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteUpdateGroup"), $code=400);
-        }
 
         if (strlen($request->gname) < 5) {
             return $this->error($this->getMessage("apperror", "ErrorInvalidError"),  $code=400);
@@ -163,12 +154,6 @@ class UsersGroupController extends Controller
      */
     public function destroy(Request $request)
     {
-         /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteDeleteGroup"), $code=400);
-        }
 
         if (is_numeric($request->id)) {
             $gpuser = UsersGroups::where("id", $request->id)->first();

@@ -21,6 +21,7 @@ class SSHExecute {
         // Buscando Host e Porta.
         $splitHost = explode(":", $credentials->ip_host);
 
+
         // Conexão com o Host.
         if (!$ssh->connect($splitHost[0], $splitHost[1])) return "E00160";
 
@@ -35,6 +36,12 @@ class SSHExecute {
         $consult = $ssh->executeCommand("show interface gpon 1/1/$credentials->ponid onu", $error);
 
         $ssh->disconnection();
+
+        /**
+         * Captura e retorna um erro sem entradas.
+         */
+        if (str_contains($consult, 'No entries found')) return "E00173";
+
 
         /**
          * Captura erro de saída e retorna um código para tratamento.
@@ -62,8 +69,10 @@ class SSHExecute {
         // Buscando Host e Porta.
         $splitHost = explode(":", $credentials->ip_host);
 
+        
         // Conexão com o Host.
         if (!$ssh->connect($splitHost[0], $splitHost[1])) return "E00160";
+        
 
         // Verificando se credencias são compatíveis.
         if (!$ssh->authorizationPassword($credentials->username, $credentials->password)) return "E00161";

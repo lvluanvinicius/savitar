@@ -2,7 +2,14 @@
 @section('title', $title)
 
 @section('content_header')
-    <h1>{{ $user->name }}</h1>
+    <div class="row">
+        <div class="col-md-7">
+            <h1>{{ $user->name }}</h1>
+        </div>
+        <div class="col-md-5">
+            <h5>Nível: {{ loadGroupUser($user->id) }}</h5>
+        </div>
+    </div>
 @stop
 
 @section('css')

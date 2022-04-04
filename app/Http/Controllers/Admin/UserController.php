@@ -17,6 +17,47 @@ class UserController extends Controller
 {
     use AppResponse, LoadMessages;
 
+
+    /**
+     * Retorna a página de usuários já com os dados carregados.
+     *  Não retorna o usuário logado.
+     *  - A atualização do próprio usuário, é necessário estar logado e realizar pela página Profile.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function profile(Request $request)
+    {
+        $user = User::where("id", auth()->user()->id)->first(); // Busca os dados do usuário logado;
+        $key = ApiKeys::where("tokenable_id", auth()->user()->id)->first(); // Busca o token usuário logado;
+
+        return view('admin.profile.index')->with([
+            "title" => $user->name . " | ". env('APP_NAME'),
+            "user" => $user,
+            "subtitle" => $user->name,
+            "mykey" => $key,
+        ]);
+    }
+
+    /**
+     * Listagem de usuários.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function listusers(Request $request)
+    {
+        $users = User::where("id", "!=", auth()->user()->id)->get();
+        $gusers = UsersGroups::get();
+
+        return view('admin.users.index')->with([
+            "title" => "Usuários | ". env('APP_NAME'),
+            "users" => $users,
+            "gusers" => $gusers,
+            "subtitle" => "Usuários"
+        ]);
+    }
+
    /**
     * Edit User Method.
     *
@@ -25,12 +66,6 @@ class UserController extends Controller
     */
     public function edituser(Request $request)
     {
-        /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
-        }
 
         if (is_null($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             return $this->error($this->getMessage("apperror", "ErrorEmailNotInformed"),  $code=400);
@@ -72,12 +107,12 @@ class UserController extends Controller
      * @param Request $request
      * @return void
      */
-    public function updatepermissions(Request $request) {
-        /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
+    public function updatepermissions(Request $request)
+    {
+        // Verificar se tem permissão para atualização.
+        if (!checkNivel(auth()->user()->id, "update") || !checkNivel(auth()->user()->id, "*")) {
+            dd(checkNivel(auth()->user()->id, "*"));
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
         }
 
         if (is_null($request->group_users)) {
@@ -167,8 +202,9 @@ class UserController extends Controller
      */
     public function adduser(Request $request)
     {
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
+        // Verificar se tem permissão para criação.
+        if (!checkNivel(auth()->user()->id, "create") || !checkNivel(auth()->user()->id, "*")) {
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
         }
 
         if (strlen($request->name) < 5) {
@@ -217,46 +253,6 @@ class UserController extends Controller
 
 
     /**
-     * Retorna a página de usuários já com os dados carregados.
-     *  Não retorna o usuário logado.
-     *  - A atualização do próprio usuário, é necessário estar logado e realizar pela página Profile.
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function profile(Request $request)
-    {
-        $user = User::where("id", auth()->user()->id)->first();
-        $key = ApiKeys::where("tokenable_id", auth()->user()->id)->first();
-
-        return view('admin.profile.index')->with([
-            "title" => $user->name . " | ". env('APP_NAME'),
-            "user" => $user,
-            "subtitle" => $user->name,
-            "mykey" => $key
-        ]);
-    }
-
-    /**
-     * Listagem de usuários.
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function listusers(Request $request)
-    {
-        $users = User::where("id", "!=", auth()->user()->id)->get();
-        $gusers = UsersGroups::get();
-
-        return view('admin.users.index')->with([
-            "title" => "Usuários | ". env('APP_NAME'),
-            "users" => $users,
-            "gusers" => $gusers,
-            "subtitle" => "Usuários"
-        ]);
-    }
-
-    /**
      * Exclusão de usuários.
      *
      * @param Request $request
@@ -264,11 +260,10 @@ class UserController extends Controller
      */
     public function deleteuser(Request $request)
     {
-        /**
-         * Verificar permissão de acesso do usuário que está tentando manipular.
-         */
-        if (!checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRouteCreateUser"), $code=400);
+
+        // Verificar se tem permissão para exclusão.
+        if (!checkNivel(auth()->user()->id, "delete") || !checkNivel(auth()->user()->id, "*")) {
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
         }
 
         if (is_numeric($request->id)) {

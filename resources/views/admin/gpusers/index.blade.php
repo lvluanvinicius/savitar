@@ -46,46 +46,72 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="">Permissões</label>
-                            <div class="row pl-5">
+                                <label for="">Ações</label>
+                                <div class="row pl-5">
 
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-create" name="permissions[]" value="create" >
-                                    <label for="p-create">Create</label>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-create" name="permissions[]" value="create" >
+                                        <label for="p-create">Create</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-update" name="permissions[]" value="update">
+                                        <label for="p-update">Update</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-read" name="permissions[]" value="read" >
+                                        <label for="p-read">Read</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-write" name="permissions[]" value="write" >
+                                        <label for="p-write">Write</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-delete" name="permissions[]" value="delete">
+                                        <label for="p-delete">Delete</label>
+                                    </div>
+
                                 </div>
 
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-update" name="permissions[]" value="update">
-                                    <label for="p-update">Update</label>
+                                <div class="h-divider-list-token"></div>
+                                <label for="">Páginas</label>
+                                <div class="row pl-5">
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-dash" name="permissions[]" value="dash">
+                                        <label for="p-dash">Dash</label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-check-input"  id="p-ulist" name="permissions[]" value="ulist">
+                                        <label for="p-ulist">Usuários</label>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <input type="checkbox" class="form-check-input"  id="p-ugroup" name="permissions[]" value="ugroup">
+                                        <label for="p-ugroup">Grupos de Usuários</label>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <input type="checkbox" class="form-check-input"  id="p-keyaccess" name="permissions[]" value="keyaccess">
+                                        <label for="p-keyaccess">Chaves de Acesso</label>
+                                    </div>
+
                                 </div>
 
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-read" name="permissions[]" value="read" >
-                                    <label for="p-read">Read</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-write" name="permissions[]" value="write" >
-                                    <label for="p-write">Write</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-delete" name="permissions[]" value="delete">
-                                    <label for="p-delete">Delete</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-dash" name="permissions[]" value="dash">
-                                    <label for="p-dash">Dash</label>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="form-check-input"  id="p-all" name="permissions[]" value="*">
-                                    <label for="p-all">All</label>
+                                <div class="h-divider-list-token"></div>
+                                <div class="row pl-5">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" class="form-check-input"  id="p-all" name="permissions[]" value="*">
+                                        <label for="p-all">Todas as Permissões</label>
+                                    </div>
                                 </div>
 
                             </div>
-                        </div>
+
+                        
 
                         <div class="form-check col-md-12">
                             <input type="checkbox" class="form-check-input" id="confirm_add_gpuser" name="confirm_add_gpuser">

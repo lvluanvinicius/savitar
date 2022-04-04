@@ -29,51 +29,14 @@ class ApisController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     public function updatekeyfromusers(Request $request)
     {
+        // Verificar se tem permissão para atualização.
+        if (!checkNivel(auth()->user()->id, "update") || !checkNivel(auth()->user()->id, "*")) {
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
+        }
+
         try {
             $user = User::where('id', $request->id)->first();
 
@@ -105,6 +68,7 @@ class ApisController extends Controller
      */
     public function update()
     {
+
         try {
             if (auth()->check()) {
                 $user = Auth::user();
@@ -141,6 +105,11 @@ class ApisController extends Controller
      */
     public function destroy(Request $request)
     {
+        /// Verificar se tem permissão para exclusão..
+        if (!checkNivel(auth()->user()->id, "delete") || !checkNivel(auth()->user()->id, "*")) {
+            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
+        }
+
         if (is_numeric($request->id)) {
             $user = ApiKeys::where("id", $request->id)->first();
             try {

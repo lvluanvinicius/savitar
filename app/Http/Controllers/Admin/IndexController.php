@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ApiKeys;
 use App\Models\User;
+use App\Traits\AppResponse;
+use App\Traits\LoadMessages;
 
 class IndexController extends Controller
 {
+    use LoadMessages, AppResponse;
+    
     public function home () {
 
         $users = User::get("*");

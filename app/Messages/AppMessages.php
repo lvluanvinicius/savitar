@@ -33,10 +33,13 @@ Trait AppMessages {
      * @var array
      */
     private $apperror = [
+        // Other
+        "ErrorUnauthorizedRoute" => "Você não tem permissão para acessar esse recurso.",
+
         // Usuários
         "ErrorLoginUser" => "Usuário ou senha incorretos",
         "ErrorNotExcludeUser" => "Falha na exclusão ou cliente não foi localizado.",
-        "ErrorEmailAlreadyExists" => "O e-mail e-mail já existe.",
+        "ErrorEmailAlreadyExists" => "O E-mail já existe.",
         "ErrorEmailNotInformed" => "E-mail informado não é válido.",
         "ErrorShortPassword" => "Sua senha deve possui 10 ou mais caracteres.",
         "ErrorConfirmChange" => "Você precisa confirmar a alteração.",
@@ -45,7 +48,6 @@ Trait AppMessages {
         "ErrorAddNewUser" => "Houve um erro ao tentar salvar o usuário.",
         "ErrorInvalidError" => "O nome precisa ser informado ou termais que 5 caractere.",
         "ErrorAddChange" => "Você precisa confirmar a criação.",
-        "ErrorUnauthorizedRoute" => "Você não tem permissão para acessar esse recurso.",
         "ErrorUnauthorizedRouteCreateUser" => "Você não possui permissão para adicionar novos usuários.",
         "ErrorUnauthorizedRouteUpdateUser" => "Você não possui permissão para atualizar usuários.",
         "ErrorUnauthorizedRouteDeleteUser" => "Você não possui permissão para excluír usuários.",
@@ -54,6 +56,7 @@ Trait AppMessages {
 
         // Users Group
         "ErrorPermissionNotInformed" => "Selecione ao menos uma permissão para esse grupo.",
+        "ErrorGroupUserAlreadyExists" => "O Grupo de Usuário já existe.",
         "ErrorAddGroup" => "Houve um erro ao tentar criar o grupo de usuários.",
         "ErrorNotExcludeUserGroup" => "Erro ao tentar excluír esse grupo de usuário.",
         "ErrorNotPossibleExcludeUserGroup" => "Não foi possível excluir esse grupo de usuário ou não foi encontrado.",
