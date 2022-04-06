@@ -70,8 +70,8 @@ class DatacomController extends Controller
         // Dados de retorno.
         $responseStatus = [
             "TotalONUs" => $total,
-            "totalUp"=> $TotalUp / $total * 100,
-            "totalDown" => $TotalDown / $total * 100,
+            "totalUp"=> $TotalUp,
+            "totalDown" => $TotalDown,
         ];
 
         // Retornar resultado do processamento.
@@ -121,3 +121,6 @@ class DatacomController extends Controller
 }
 
 //
+
+
+
