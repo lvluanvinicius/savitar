@@ -25,7 +25,7 @@ class DatacomController extends Controller
     {
         // Consulta.
         $sshConsult = $this->bridgeLoadPons($request);
-        
+
         // Se houver erro de comunicação.
         if ($sshConsult == "E00160") return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
 
@@ -37,7 +37,7 @@ class DatacomController extends Controller
 
         // Se houve um erro de sintax no comando.
         if ($sshConsult == "E00172") return $this->error($this->getMessage("apierror", "ErrorSintaxCommand"), 200);
-        
+
         // Retorna erro se nenhuma entrada for encontrada para o comando executado.
         if ($sshConsult == "E00173") return $this->error($this->getMessage("apierror", "ErrorNoEntriesFound"), 200);
 
@@ -105,14 +105,13 @@ class DatacomController extends Controller
         $sshArray = explode("\n", $sshConsult);
         $newSSHArray = [];
         foreach ($sshArray as $line) {
-            if (\str_contains($line, "Physical interface")) {
-                // Limpando String para filtro da pon.
-                $tmp01 = explode(",", $line)[0];
-                $tmp02 = explode("gpon", $tmp01);
-                $tmp03 = explode("/", str_replace(" ", "", $tmp02[1]));
-
-                // Salvando as pons descobertas.
-                \array_push($newSSHArray, ["pon" => $tmp03[2]]);
+            if (!\str_contains($line, "Transceiver type")) {
+                if (\str_contains($line, "Up")) {
+                    $tmp01 = explode(",", $line)[0];
+                    $tmp02 = explode(" ", $tmp01);
+                    $tmp03 = explode("/", $tmp02[1]);
+                    \array_push($newSSHArray, ["pon" => $tmp03[2]]);
+                }
             }
         }
 

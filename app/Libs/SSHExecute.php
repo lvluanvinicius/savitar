@@ -69,10 +69,10 @@ class SSHExecute {
         // Buscando Host e Porta.
         $splitHost = explode(":", $credentials->ip_host);
 
-        
+
         // Conexão com o Host.
         if (!$ssh->connect($splitHost[0], $splitHost[1])) return "E00160";
-        
+
 
         // Verificando se credencias são compatíveis.
         if (!$ssh->authorizationPassword($credentials->username, $credentials->password)) return "E00161";
@@ -82,7 +82,8 @@ class SSHExecute {
          * Nesse exemplo, é realizado uma consulta em um arquivo armazenado no diretório /tmp.
          * Não há adaptação para consulta na OLT diretamente.
          */
-        $consult = $ssh->executeCommand("show interface gpon | nomore", $error); // dis pons
+        // $consult = $ssh->executeCommand("show interface gpon | nomore", $error); // dis pons
+        $consult = $ssh->executeCommand("show interface gpon brief", $error); // dis ponsshow interface gpon brief
 
         $ssh->disconnection();
 

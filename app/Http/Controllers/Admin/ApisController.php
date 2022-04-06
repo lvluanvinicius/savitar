@@ -32,10 +32,11 @@ class ApisController extends Controller
 
     public function updatekeyfromusers(Request $request)
     {
-        // Verificar se tem permissão para atualização.
-        if (!checkNivel(auth()->user()->id, "update") || !checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
-        }
+        // dd(!checkNivel(auth()->user()->id, "*"));
+        // // Verificar se tem permissão para atualização.
+        // if (!checkNivel(auth()->user()->id, "update") || !checkNivel(auth()->user()->id, "*")) {
+        //     return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
+        // }
 
         try {
             $user = User::where('id', $request->id)->first();
