@@ -13,7 +13,7 @@ class SSHExecute {
      * @param Request $credentials
      * @return string
      */
-    public function getInOLTPons($credentials)
+    public function getInOLTPonsOnus($credentials)
     {
         // Instancia de SSH Libs
         $ssh = new LibsSshLib();
@@ -82,8 +82,8 @@ class SSHExecute {
          * Nesse exemplo, é realizado uma consulta em um arquivo armazenado no diretório /tmp.
          * Não há adaptação para consulta na OLT diretamente.
          */
-        // $consult = $ssh->executeCommand("show interface gpon | nomore", $error); // dis pons
-        $consult = $ssh->executeCommand("show interface gpon brief", $error); // dis ponsshow interface gpon brief
+        $consult = $ssh->executeCommand("show interface gpon | nomore", $error); // dis pons
+        // $consult = $ssh->executeCommand("show interface gpon brief", $error); // dis ponsshow interface gpon brief
 
         $ssh->disconnection();
 

@@ -19,7 +19,7 @@ Trait SSHBridge {
         $ssh = new SSHExecute;
 
         // Consulta.
-        return $ssh->getInOLTPons($credentials);
+        return $ssh->getInOLTPonsOnus($credentials);
 
     }
 

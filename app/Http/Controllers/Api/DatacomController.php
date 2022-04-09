@@ -43,8 +43,8 @@ class DatacomController extends Controller
 
         // Tratar dados...
         $sshArray = explode("\n", $sshConsult);
-        $TotalDown = 0; // Totaliza quantas ONUs estão off.
-        $TotalUp = 0; // Totaliza quantas ONUs estão on.
+        $totalDown = 0; // Totaliza quantas ONUs estão off.
+        $totalUp = 0; // Totaliza quantas ONUs estão on.
         $total = 0; // Totaliza quantas ONUs estão visiveis a serem tratadas.
 
         // Percorrendo dados recebidos e realizando o tratamento.
@@ -53,14 +53,14 @@ class DatacomController extends Controller
             // Contagem de quantas ONUs estão Off.
             if (\str_contains($line, "Down")) {
                 if (!\str_contains($line, "Serial Number")) {
-                    $TotalDown+=1;
+                    $totalDown+=1;
                     $total+=1;
                 }
             }
             // Contagem de quantas ONUs estão On.
             elseif (\str_contains($line, "Up")) {
                 if (!\str_contains($line, "Serial Number")) {
-                    $TotalUp+=1;
+                    $totalUp+=1;
                     $total+=1;
                 }
             }
@@ -70,8 +70,8 @@ class DatacomController extends Controller
         // Dados de retorno.
         $responseStatus = [
             "TotalONUs" => $total,
-            "totalUp"=> $TotalUp,
-            "totalDown" => $TotalDown,
+            "totalUp"=> floatval(round((($totalUp/$total)*100), 2)),
+            "totalDown" => floatval(round((($totalDown/$total)*100), 2)),
         ];
 
         // Retornar resultado do processamento.
@@ -105,12 +105,13 @@ class DatacomController extends Controller
         $sshArray = explode("\n", $sshConsult);
         $newSSHArray = [];
         foreach ($sshArray as $line) {
-            if (!\str_contains($line, "Transceiver type")) {
-                if (\str_contains($line, "Up")) {
+            if (\str_contains($line, "Physical interface")) {
+                if (\str_contains($line, "Enabled") && \str_contains($line, "link is Up")) {
                     $tmp01 = explode(",", $line)[0];
-                    $tmp02 = explode(" ", $tmp01);
-                    $tmp03 = explode("/", $tmp02[1]);
-                    \array_push($newSSHArray, ["pon" => $tmp03[2]]);
+                    $tmp02 = explode(":", $tmp01)[1];
+                    $tmp03 = explode("gpon ", $tmp02)[1];
+                    $tmp04 = explode("/", $tmp03)[2];
+                    \array_push($newSSHArray, ["pon" => $tmp04]);
                 }
             }
         }
@@ -119,8 +120,4 @@ class DatacomController extends Controller
         return $this->success($newSSHArray);
     }
 }
-
-//
-
-
 
