@@ -101,7 +101,7 @@
 
                     <div class="h-divider-list-token"></div>
 
-                    <form action="{{ route('app.relogin.api.user', ['id' => $user->id]) }}" method="post">
+                    <form action="{{ route('admin.relogin.api.user', ['id' => $user->id]) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="card-footer text-right">
@@ -114,7 +114,7 @@
 
                 <div class="card-body">
                     <strong class="text-info">Nenhuma chave localizada para esse usuário.</strong>
-                    <form action="{{ route('app.relogin.api.user', ['id' => $user->id]) }}" method="post">
+                    <form action="{{ route('admin.relogin.api.user', ['id' => $user->id]) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="card-footer text-right">

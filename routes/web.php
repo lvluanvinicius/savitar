@@ -70,7 +70,7 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
         // ApisController
         Route::middleware("keypages")->group(function () {
             Route::get("users-apis-keys", [App\Http\Controllers\Admin\ApisController::class, "index"])->name('admin.apis.list');
-            Route::put("user-relogin-api-user", [App\Http\Controllers\Admin\ApisController::class, "updatekeyfromusers"])->name('app.relogin.api.user');
+            Route::put("user-relogin-api-user", [App\Http\Controllers\Admin\ApisController::class, "updatekeyfromusers"])->name('admin.relogin.api.user');
             Route::delete("user-api-key", [App\Http\Controllers\Admin\ApisController::class, "destroy"])->name('admin.apis.delete');
         });
 
@@ -88,7 +88,7 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
         Route::middleware("groupuserspage")->group(function () {
             Route::get("group-users", [App\Http\Controllers\Admin\UsersGroupController::class, "index"])->name('admin.users.group');
             Route::get("group-users-edit", [App\Http\Controllers\Admin\UsersGroupController::class, "show"])->name('admin.users.group.store');
-            Route::put("group-users-update", [App\Http\Controllers\Admin\UsersGroupController::class, "create"])->name('admin.users.group.create');
+            Route::put("group-users-create", [App\Http\Controllers\Admin\UsersGroupController::class, "create"])->name('admin.users.group.create');
             Route::patch("group-users-update", [App\Http\Controllers\Admin\UsersGroupController::class, "update"])->name('admin.users.group.update');
             Route::delete("group-users-delete", [App\Http\Controllers\Admin\UsersGroupController::class, "destroy"])->name('admin.users.group.delete');
         });

@@ -64,6 +64,7 @@ Trait AppMessages {
         "ErrorUnauthorizedRouteUpdateGroup" => "Você não possui permissão para atualizar grupos de usuários.",
         "ErrorUnauthorizedRouteDeleteGroup" => "Você não possui permissão para excluír grupos de usuários.",
         "ErrorUpdateGroup" => "Não foi possível atualizar esse grupo de usuário ou não foi encontrado.",
+        "ErrorInvalidPermissions" => "Você informou uma permissão inválida ou que não existe.",
 
 
         // Exception

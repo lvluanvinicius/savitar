@@ -12,3 +12,6 @@ Permissões:
     :ulist -> "Permissão de acesso aos usuários e Ações";
     :ugroup -> "Permissão de acesso ao Grupo de Usuários e Ações";
     :keyaccess -> "Permissão de acesso a Chaves de Acesso e Ações.";
+
+
+    ["dash", "ulist", "ugroup", "keyaccess", "create", "update", "read", "write", "delete"]

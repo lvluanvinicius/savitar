@@ -32,32 +32,32 @@ class ApisController extends Controller
 
     public function updatekeyfromusers(Request $request)
     {
-        // dd(!checkNivel(auth()->user()->id, "*"));
-        // // Verificar se tem permissão para atualização.
-        // if (!checkNivel(auth()->user()->id, "update") || !checkNivel(auth()->user()->id, "*")) {
-        //     return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
-        // }
+        // Verificar se tem permissão para atualização.
+        if (checkNivel(auth()->user()->id, "update") || checkNivel(auth()->user()->id, "*")) {
+            try {
+                //$keyAccess = ApiKeys::where('id', $request->id)->first(); // Buscar o modelo da api em atividade.
+                $user = User::where('id', $request->id)->first(); // Buscar o modelo de usuário relacionado a api.
 
-        try {
-            $user = User::where('id', $request->id)->first();
+                $token = $user->tokens();
 
-            $token = $user->tokens();
+                if (!is_null($token)) {
+                    $user->tokens()->delete();
+                    $token = $user->createToken($user->name)->plainTextToken;
+                    return $this->success($this->getMessage("apisuccess", "SuccessKeyUpdate"), $code=200, [
+                        "new_token" => $token,
+                        "status" => "Updated"
+                    ]);
+                } else {
+                    return $this->info($this->getMessage("apiinfo", "UserDoesNotHaveKey"), $code=400);
+                }
 
-            if (!is_null($token)) {
-                $user->tokens()->delete();
-                $token = $user->createToken($user->name)->plainTextToken;
-                return $this->success($this->getMessage("apisuccess", "SuccessKeyUpdate"), $code=200, [
-                    "new_token" => $token,
-                    "status" => "Updated"
-                ]);
-            } else {
-                return $this->info($this->getMessage("apiinfo", "UserDoesNotHaveKey"), $code=400);
+
+            } catch (Exception $e) {
+                return $this->error($this->getMessage("apierror", "ErrorRevokeKeyUnauthorized"), $code=400);
             }
-
-
-        } catch (Exception $e) {
-            return $this->error($this->getMessage("apierror", "ErrorRevokeKeyUnauthorized"), $code=400);
         }
+
+        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
     }
 
     /**

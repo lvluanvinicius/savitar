@@ -37,3 +37,19 @@ if (!function_exists("loadGroupUser")) {
         }
     }
 }
+
+
+if (!function_exists("validatePermissions")) {
+    function validatePermissions($permissionParam) {
+
+        // Permissões válidas e registradas.
+        $permissionsList = [
+            "*", "dash", "ulist", "ugroup", "keyaccess",
+            "create", "update", "read", "write", "delete"
+        ];
+
+        if (!array_search($permissionParam, $permissionsList)) return false;
+
+        return true;
+    }
+}

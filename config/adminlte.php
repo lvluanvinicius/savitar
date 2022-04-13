@@ -249,34 +249,6 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
 
-        ['header' => 'administration'],
-        [
-            'text' => 'users',
-            'route'  => 'admin.users',
-            'icon' => 'fas fa-fw fa-users',
-        ],
-
-        [
-            'text' => 'gpusers',
-            'route'  => 'admin.users.group',
-            'icon' => 'fas fa-fw fa-users-cog',
-        ],
-
-        [
-            'text' => 'apis',
-            'route'  => 'admin.apis.list',
-            'icon' => 'fas fa-fw fa-key',
-        ],
-
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'route'  => 'app.profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-
-        // ['header' => 'Outros'],
-
 
     ],
 

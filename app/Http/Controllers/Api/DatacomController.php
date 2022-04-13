@@ -13,19 +13,8 @@ class DatacomController extends Controller
 {
     use SSHBridge, LoadMessages, ApiResponser;
 
-    /**
-     * Método de consulta de PONs.
-     * Retorna total de ONUs Off e Total de ONUs On em valor de porcentagem.
-     * Retorna o total de ONUs na PON.
-     *
-     * @param Request $request
-     * @return Array
-     */
-    public function loadPons(Request $request)
+    private function checkDocumentation($sshConsult)
     {
-        // Consulta.
-        $sshConsult = $this->bridgeLoadPons($request);
-
         // Se houver erro de comunicação.
         if ($sshConsult == "E00160") return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
 
@@ -40,6 +29,23 @@ class DatacomController extends Controller
 
         // Retorna erro se nenhuma entrada for encontrada para o comando executado.
         if ($sshConsult == "E00173") return $this->error($this->getMessage("apierror", "ErrorNoEntriesFound"), 200);
+    }
+
+    /**
+     * Método de consulta de PONs.
+     * Retorna total de ONUs Off e Total de ONUs On em valor de porcentagem.
+     * Retorna o total de ONUs na PON.
+     *
+     * @param Request $request
+     * @return Array
+     */
+    public function loadPons(Request $request)
+    {
+        // Consulta.
+        $sshConsult = $this->bridgeLoadPons($request);
+
+        // Verifica se algum erro é gerado no resultado, de acordo com a Documentação de erros.
+        $this->checkDocumentation($sshConsult);
 
         // Tratar dados...
         $sshArray = explode("\n", $sshConsult);
@@ -89,17 +95,8 @@ class DatacomController extends Controller
         // Consulta.
         $sshConsult = $this->bridgeDiscoveryPonsDatacom($request);
 
-        // Se houver erro de comunicação.
-        if ($sshConsult == "E00160") return $this->error($this->getMessage("apierror", "ErrorTryingInitiateConnectionHost"), 200);
-
-        // Se houver erro de autenticação.
-        if ($sshConsult == "E00161") return $this->error($this->getMessage("apierror", "ErrorSSHCredentials"), 200);
-
-        // Se houver erro na saída do comando.
-        if ($sshConsult == "E00171") return $this->error($this->getMessage("apierror", "ErrorStdOut"), 200);
-
-        // Se houve um erro de sintax no comando.
-        if ($sshConsult == "E00172") return $this->error($this->getMessage("apierror", "ErrorSintaxCommand"), 200);
+        // Verifica se algum erro é gerado no resultado, de acordo com a Documentação de erros.
+        $this->checkDocumentation($sshConsult);
 
         // Tratar dados...
         $sshArray = explode("\n", $sshConsult);
@@ -119,5 +116,42 @@ class DatacomController extends Controller
         // Retornar resultado do processamento.
         return $this->success($newSSHArray);
     }
+
+
+    public function loadAlarmsInPons(Request $request)
+    {
+        // Consulta.
+        $sshConsult = $this->bridgeLoadAlarmsInPons($request);
+        $sshConsultOnus = $this->bridgeLoadPons($request);
+
+        // Verifica se algum erro é gerado no resultado, de acordo com a Documentação de erros.
+        $this->checkDocumentation($sshConsult);
+
+        // Tratar dados...
+        /// GPON_LOSi - ID de Alarms do tipo LOSS.
+        /// GPON_DGi - ID de Alarms do tipo energia .
+        $sshArray = explode("\n", $sshConsult);
+        $totalGPON_LOSi = 0;
+        $totalGPON_DGi = 0;
+        foreach ($sshArray as $line) {
+            if (\str_contains($line, "GPON_DGi")) {
+                $totalGPON_DGi+=1;
+            }
+
+            if (\str_contains($line, "GPON_LOSi")) {
+                $totalGPON_LOSi+=1;
+            }
+        }
+
+        // Dados de retorno.
+        $responseStatus = [
+            "GPON_LOSi" => $totalGPON_LOSi,
+            "GPON_DGi" => $totalGPON_DGi,
+        ];
+
+        // Retornar resultado do processamento.
+        return $this->success($responseStatus);
+    }
+
 }
 

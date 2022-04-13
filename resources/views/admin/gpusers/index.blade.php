@@ -27,7 +27,7 @@
           <div class="modal-content">
 
             <div class="modal-header">
-              <h4 class="modal-title">Novo usuário</h4>
+              <h4 class="modal-title">Novo Grupo de Usuário</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -111,7 +111,7 @@
 
                             </div>
 
-                        
+
 
                         <div class="form-check col-md-12">
                             <input type="checkbox" class="form-check-input" id="confirm_add_gpuser" name="confirm_add_gpuser">

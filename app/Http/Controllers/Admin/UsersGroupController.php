@@ -37,15 +37,22 @@ class UsersGroupController extends Controller
      */
     public function create(Request $request)
     {
+        // Valida se as sessões informadas são válidas.
+        for ($prmIndex = 0; $prmIndex < count($request->permissions); ++$prmIndex) {
+            if (!validatePermissions($request->permissions[$prmIndex])) return $this->error($this->getMessage("apperror", "ErrorInvalidPermissions"),  $code=400);
+        }
 
+        // Verifica se o nome do grupo tem mais que 5 caracteres.
         if (strlen($request->gname) < 5) {
             return $this->error($this->getMessage("apperror", "ErrorInvalidError"),  $code=400);
         }
 
+        // Verifica se as permissões são nulas.
         if (is_null($request->permissions)) {
             return $this->error($this->getMessage("apperror", "ErrorPermissionNotInformed"),  $code=400);
         }
 
+        // Verifica se a criação foi confirmada.
         if ($request->confirm_add_gpuser != "on") {
             return $this->error($this->getMessage("apperror", "ErrorAddChange"),  $code=400);
         }

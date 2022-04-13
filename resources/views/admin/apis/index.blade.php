@@ -39,9 +39,12 @@
                                     <td>
                                         <div class="actions-buttons-group">
 
-                                                <div class="ml-1">
-                                                        <x-actions  troute="admin.apis.delete" ticonAndClass="fa fa-trash text-danger" methodText="DELETE" iduser="{{ $apikey->id }}" />
-                                                </div>
+                                            {{-- <div class="ml-1">
+                                                <x-actions  troute="admin.relogin.api.user" ticonAndClass="fa fa-redo text-primary" methodText="PUT" iduser="{{ $apikey->id }}" />
+                                            </div> --}}
+                                            <div class="ml-1">
+                                                <x-actions  troute="admin.apis.delete" ticonAndClass="fa fa-trash text-danger" methodText="DELETE" iduser="{{ $apikey->id }}" />
+                                            </div>
 
                                         </div>
                                     </td>
@@ -98,6 +101,7 @@
 
                 toastr.success('{{ session("message") }}')
             }
+
             // Retornar uma mensagem de erro caso o tipo seja Error.
             else {
                 toastr.error('{{ session("message") }}')
