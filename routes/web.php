@@ -93,6 +93,12 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             Route::delete("group-users-delete", [App\Http\Controllers\Admin\UsersGroupController::class, "destroy"])->name('admin.users.group.delete');
         });
 
+
+        // GraphicsReportsController
+        Route::middleware("reportspage")->group(function () {
+            Route::get("graphics-reports", [App\Http\Controllers\Admin\GraphicsReportsController::class, "index"])->name('admin.graphcs.reports');
+        });
+
     });
 
 });

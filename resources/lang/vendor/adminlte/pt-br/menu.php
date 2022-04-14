@@ -21,5 +21,7 @@ return [
     'apis'                             => "Chaves de acesso",
     'my_key'                             => "Minha chave",
     "gpusers"                       => "Grupo de Usuários",
-    "exit"                       => "Sair"
+    "exit"                       => "Sair",
+    "reports"                       => "Relatórios",
+    "graphics-reports"              => "Gráficos",
 ];

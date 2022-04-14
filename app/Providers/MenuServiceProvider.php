@@ -28,7 +28,7 @@ class MenuServiceProvider extends ServiceProvider
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
             // Add some items to the menu...
 
-            // $event->menu->add(['header' => 'administration']); // Sessão administração
+            $event->menu->add(['header' => 'administration']); // Sessão administração
 
             // Insere link de acesso a lista de usuários.
             if(checkNivel(auth()->user()->id, "ulist") || checkNivel(auth()->user()->id, "*")) {
@@ -47,6 +47,7 @@ class MenuServiceProvider extends ServiceProvider
                     'icon' => 'fas fa-fw fa-users-cog',
                 ]);
             }
+
             // Insere link de acesso a lista de apis.
             if(checkNivel(auth()->user()->id, "keyaccess") || checkNivel(auth()->user()->id, "*")) {
                 $event->menu->add([
@@ -56,7 +57,18 @@ class MenuServiceProvider extends ServiceProvider
                 ]);
             }
 
-            // $event->menu->add(['header' => 'account_settings']); // Sessão de configurações de conta
+            $event->menu->add(['header' => 'reports']); // Sessão de relatórios.
+
+            // Insere link de acesso a página de graficos.
+            $event->menu->add([
+                'text' => 'graphics-reports',
+                'route'  => 'admin.graphcs.reports',
+                'icon' => 'fas fa-fw fa-chart-area',
+            ]);
+
+            $event->menu->add(['header' => 'account_settings']); // Sessão de configurações de conta.
+
+            // Insere link de acesso ao perfil.
             $event->menu->add([
                 'text' => 'profile',
                 'route'  => 'app.profile',

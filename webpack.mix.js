@@ -18,4 +18,4 @@ mix.
 
     .copyDirectory("resources/views/admin/assets/img", "public/assets/admin/img")
 
-   . js("resources/views/admin/assets/js/admin.custom.js", "public/assets/admin/js");
+   . js("resources/views/admin/assets/js/admin.custom.js", "public/assets/admin/js")
