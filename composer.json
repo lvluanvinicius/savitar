@@ -28,7 +28,8 @@
         },
         "files": [
             "app/Helpers/Manipuledate.php",
-            "app/Helpers/CheckGroupUser.php"
+            "app/Helpers/CheckGroupUser.php",
+            "app/Helpers/ClientHTTP.php"
         ],
         "classmap": [
             "app/Libs"

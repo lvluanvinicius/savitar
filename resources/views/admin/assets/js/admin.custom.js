@@ -6,6 +6,3 @@ $(document).ready(function () {
         document.execCommand('copy');
     });
 });
-
-
-// 53|sdmvVdcKCLnNYxQssGKmB6NGvpetPnc3zGceZJTE

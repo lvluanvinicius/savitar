@@ -14,7 +14,7 @@ $(document).ready(function () {
     document.getElementById('text-token').innerHTML;
     document.execCommand('copy');
   });
-}); // 53|sdmvVdcKCLnNYxQssGKmB6NGvpetPnc3zGceZJTE
+});
 
 /***/ }),
 
