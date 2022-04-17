@@ -5,7 +5,7 @@ apt install -y lsb-release ca-certificates apt-transport-https software-properti
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list && \
 wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - && \
 apt update && apt install php8.0 && \
-apt install php-{xml,curl,intl,mysql,zip,dom} && apt intall phpunit
+apt install php-{xml,curl,intl,mysql,zip,dom,ssh} && apt intall phpunit
 
 cp /volume/Api-For-Zabbix/.env.example /volume/Api-For-Zabbix/.env
 

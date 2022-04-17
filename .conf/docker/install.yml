@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  api-zabbix:
+    container_name: Api-Zabbix
+    build:
+      context: ../../
+      dockerfile: ./.conf/docker/Dockerfile
+    ports:
+      - 8001:80
+    deploy:
+      restart_policy:
+        condition: on-failure
+
