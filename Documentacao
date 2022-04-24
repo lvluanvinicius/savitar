@@ -15,3 +15,8 @@ Permissões:
 
 
     ["dash", "ulist", "ugroup", "keyaccess", "create", "update", "read", "write", "delete"]
+
+
+create database api_zabbix character set utf8mb4 collate utf8mb4_unicode_ci;
+create user 'apizabbix'@'%' identified by 'password';
+grant all privileges on api_zabbix.* to "apizabbix"@"%";

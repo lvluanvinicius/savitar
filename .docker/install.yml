@@ -1,0 +1,15 @@
+services:
+  api-zabbix:
+    container_name: Teste
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile
+
+    volumes:
+      - ../:/var/www/html/
+
+    ports:
+      - 8001:80
+    deploy:
+      restart_policy:
+        condition: on-failure

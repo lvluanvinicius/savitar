@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'groupuserspage' => \App\Http\Middleware\Pages\GroupUserPage::class,
         'keypages' => \App\Http\Middleware\Pages\KeyPages::class,
         'reportspage' => \App\Http\Middleware\Pages\Reportspage::class,
+        "centralpage" => \App\Http\Middleware\Pages\CentralPage::class,
     ];
 }

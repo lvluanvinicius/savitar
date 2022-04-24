@@ -2,14 +2,11 @@
 
 namespace App\Http\Middleware\Pages;
 
-use App\Traits\AppResponse;
-use App\Traits\LoadMessages;
 use Closure;
 use Illuminate\Http\Request;
 
-class KeyPages
+class CentralPage
 {
-    use LoadMessages, AppResponse;
     /**
      * Handle an incoming request.
      *
@@ -19,9 +16,6 @@ class KeyPages
      */
     public function handle(Request $request, Closure $next)
     {
-        if (checkNivel(auth()->user()->id, "keyaccess") || checkNivel(auth()->user()->id, "*")) {
-            return $next($request);
-        }
-        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
+        return $next($request);
     }
 }

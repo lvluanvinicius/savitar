@@ -101,6 +101,12 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             Route::post("graphics-load-hosts", [App\Http\Controllers\Admin\GraphicsReportsController::class, "getHosts"])->name('admin.graphcs.load.hosts');
         });
 
+
+        // CentralReportsController
+        Route::middleware("centralpage")->group(function () {
+            Route::get("central-reports", [App\Http\Controllers\Admin\CentralReportsController::class, "index"])->name('admin.central.reports');
+        });
+
     });
 
 });
