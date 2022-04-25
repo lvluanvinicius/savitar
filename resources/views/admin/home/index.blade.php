@@ -3,7 +3,6 @@
 
 @section('css')
     <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
 @stop

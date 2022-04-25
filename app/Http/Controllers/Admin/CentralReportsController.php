@@ -10,7 +10,8 @@ class CentralReportsController extends Controller
     public function index()
     {
         return view("admin.central.index")->with([
-            "title" => "Relatório Central" . env("APP_NAME")
+            "title" => "Relatório Central | " . env("APP_NAME"),
+            "subtitle" => "Busca avançada"
         ]);
     }
 }

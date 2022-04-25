@@ -37,6 +37,7 @@ Trait AppMessages {
         "ErrorUnauthorizedRoute" => "Você não tem permissão para acessar esse recurso.",
 
         // Usuários
+        "ErrorUnableToConnectToDataServer" => "Houve um erro ao tentar se conectar a base de dados para localizar seu usuário. Se esse erro persistir, consulte nosso suporte.",
         "ErrorLoginUser" => "Usuário ou senha incorretos",
         "ErrorNotExcludeUser" => "Falha na exclusão ou cliente não foi localizado.",
         "ErrorEmailAlreadyExists" => "O E-mail já existe.",

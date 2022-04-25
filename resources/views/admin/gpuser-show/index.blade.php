@@ -7,7 +7,6 @@
 
 @section('css')
     <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
-    <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.custom.css') }}">
 @endsection
