@@ -20,28 +20,52 @@
             </div>
 
             <div class="card-body">
+            <form action="{{ route('admin.central.reports.general') }}" method="get">
+            @csrf
+
                 <div class="row">
 
-                    <div class="col-md-3">
-                        <!-- Date and time range -->
-                        <div class="form-group">
-                            <label>Selecione uma data:</label>
+                    <!-- Date and time range -->
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Data de início:</label>
 
-                            <div class="input-group">
-                                <div id="central-reports-range" 
-                                style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"
-                                >
-                                    <i class="fa fa-calendar"></i>&nbsp;
-                                    <span></span> <i class="fa fa-caret-down"></i>
+                                    <input type="date" class="form-control" name="start_date" id="start-date" value="{{ is_null(old('start_date')) ? date('Y-m-d') : old('start_date') }}">
                                 </div>
                             </div>
-                        </div> 
-                        <!--/ Date and time range -->           
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Horário de início:</label>
+
+                                    <input type="time" step="2" class="form-control" name="start_hours" id="start-hours" value="{{ is_null(old('start_hours')) ? '00:00:00' : old('start_hours') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Data final:</label>
+
+                                    <input type="date" class="form-control" name="stop_date" id="stop-date" value="{{ is_null(old('stop_date')) ? date('Y-m-d') : old('stop_date') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Horário final:</label>
+
+                                    <input type="time" step="2" class="form-control" name="stop_hours" id="stop-hours" value="{{ is_null(old('stop_hours')) ? '23:59:59' : old('stop_hours') }}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!--/ Date and time range -->
 
                     <div class="col-md-9">
                         <div class="row">
-                            
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Informe uma fila</label>
@@ -52,7 +76,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Informe um agente</label>
-                                    <input class="form-control" id="central-agent-filter" placeholder="Ex: 900"/>
+                                    <input class="form-control" id="central-agents-filter" placeholder="Ex: 900"/>
                                 </div>
                             </div>
 
@@ -69,12 +93,13 @@
                     <div class="col-md-12">
                         <div class="form-group mt-3 float-right">
                             <div class="input-group">
-                                <button class="btn btn-primary" id="load-data-attendance">Buscar</button>
+                                <button class="btn btn-primary" id="load-data-filter">Buscar</button>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -134,14 +159,6 @@
         }, cb);
 
         cb(start, end);
-
-    });
-</script>
-
-<script>
-    $("#load-data-attendance").on("click", function (event) {
-        const startDate = $("#central-reports-range").data("daterangepicker").startDate.format('YYYY-MM-DD HH:MM:SS');
-        const stopDate = $("#central-reports-range").data("daterangepicker").endDate.format('YYYY-MM-DD HH:MM:SS');
 
     });
 </script>

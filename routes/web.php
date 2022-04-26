@@ -104,7 +104,8 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
 
         // CentralReportsController
         Route::middleware("centralpage")->group(function () {
-            Route::get("central-reports", [App\Http\Controllers\Admin\CentralReportsController::class, "index"])->name('admin.central.reports');
+            Route::get("central", [App\Http\Controllers\Admin\CentralReportsController::class, "index"])->name('admin.central.reports');
+            Route::get("central-reports", [App\Http\Controllers\Admin\CentralReportsController::class, "generalReports"])->name('admin.central.reports.general');
         });
 
     });
