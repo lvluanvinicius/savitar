@@ -120,8 +120,14 @@ class HTTPClient
         }
     }
 
-    public function get_central_reports_attended($params)
+    public function get_central_reports_attended(Array $params)
     {
         return $this->ctl_http_accept("/estatistica_detalhada/relatorio", $params);
+    }
+
+
+    public function get_central_report_queue_statistics(Array $params)
+    {
+        return $this->ctl_http_accept("/estatistica_fila/relatorio", $params);
     }
 }

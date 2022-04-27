@@ -26,15 +26,23 @@ class CentralReportsController extends Controller
         $http = new HTTPClient();
 
         // Get data
-        $respHttp = $http->get_central_reports_attended([
+        $respHttp = $http->get_central_report_queue_statistics([
             "dataInicial" => "$request->start_date $request->start_hours",
             "dataFinal" => "$request->stop_date $request->stop_hours",
-            "agente" => $request->agents_filter,
             "filas" => $request->queues_filter,
-            "numeroPagina" => 1
         ]);
 
-        dd($respHttp);
+        $newDataCentral = [];
+
+        foreach ($respHttp as $results) {
+            \array_push($newDataCentral, [
+                "data" => $results[0]["data"],
+                "total_chamadas" => $results[0]["data"],
+                "total_abandonadas" => $results[0]["total_abandonadas"],
+                "porcen_abandonadas" => $results[0]["porcen_abandonadas"],
+                "porcen_atendidas" => $results[0]["porcen_atendidas"]
+            ]);
+        }
 
         return view("admin.central-reports-graphs.index")->with([
             "title" => "Relatório Central | " . env("APP_NAME"),

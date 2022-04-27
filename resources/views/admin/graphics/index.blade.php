@@ -136,8 +136,7 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <!-- Chart's container -->
-                    <div id="chart" style="height: 300px;"></div>
+                    //
                 </div>
             </div>
         </div>
@@ -153,10 +152,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <!-- Charting library -->
-    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
-    <!-- Chartisan -->
-    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 
     {{-- Feedback ao usuário sobre a ação executada.  --}}
     @if (session('message') && session('status') )
@@ -261,13 +256,6 @@
 
         //
 
-    </script>
-
-    <script>
-        const chart = new Chartisan({
-            el: '#chart',
-            url: "@chart('sample_chart')",
-        });
     </script>
 
 
