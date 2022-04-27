@@ -17,12 +17,28 @@ class CentralReportsController extends Controller
     {
         return view("admin.central.index")->with([
             "title" => "Relatório Central | " . env("APP_NAME"),
-            "subtitle" => "Busca avançada"
+            "subtitle" => "Relatórios"
         ]);
     }
 
-    public function generalReports(Request $request)
+    public function generalReportsGraphs(Request $request)
     {
-        return $request->all();
+        $http = new HTTPClient();
+
+        // Get data
+        $respHttp = $http->get_central_reports_attended([
+            "dataInicial" => "$request->start_date $request->start_hours",
+            "dataFinal" => "$request->stop_date $request->stop_hours",
+            "agente" => $request->agents_filter,
+            "filas" => $request->queues_filter,
+            "numeroPagina" => 1
+        ]);
+
+        dd($respHttp);
+
+        return view("admin.central-reports-graphs.index")->with([
+            "title" => "Relatório Central | " . env("APP_NAME"),
+            "subtitle" => "Relatórios"
+        ]);
     }
 }

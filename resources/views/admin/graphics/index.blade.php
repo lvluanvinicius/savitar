@@ -31,59 +31,96 @@
         <div class="card-body">
             <div class="row">
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="id_group_hosts_multiple">
-                            Selecione um grupo de host
-                        </label>
-                        <select class="js-states form-control" id="id_group_hosts_multiple">
-                            @for ($index = 0; $index < count(getGroupHosts()); $index++)
-                                <option value="{{ getGroupHosts()[$index]['groupid'] }}">
-                                    {{ getGroupHosts()[$index]['name'] }}
-                                </option>
-                            @endfor
-                        </select>
+                <div class="col-md-3 row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_group_hosts_multiple">
+                                Selecione um grupo de host
+                            </label>
+                            <select class="js-states form-control" id="id_group_hosts_multiple">
+                                @for ($index = 0; $index < count(getGroupHosts()); $index++)
+                                    <option value="{{ getGroupHosts()[$index]['groupid'] }}">
+                                        {{ getGroupHosts()[$index]['name'] }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-outline-secondary float-right w-100" id="load_templates">Carregar templates</button>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <button class="" id="load_templates">Carregar templates</button>
+                <div class="col-md-3 row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_templates_multiple">
+                                Selecione os templates
+                            </label>
+                            <select class="js-states form-control" id="id_templates_multiple">
+                            </select>
+
+                        </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-outline-secondary float-right w-100" id="load_hosts">Carregar hosts</button>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="id_templates_multiple">
-                            Selecione os templates
-                        </label>
-                        <select class="js-states form-control" id="id_templates_multiple">
-                        </select>
+
+                <div class="col-md-3 row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_hosts_multiple">Selecione um host</label>
+
+                            <select class="js-states form-control" id="id_hosts_multiple">
+                            </select>
+
+                        </div>
+
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-outline-secondary float-right w-100" id="load_graphcs">Carregar Gráficos</button>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <button class="" id="load_hosts">Carregar hosts</button>
+                <div class="col-md-3 row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_hosts_multiple">Selecione os gráficos</label>
+
+                            <select class="js-states form-control" id="id_hosts_multiple">
+                            </select>
+
+                        </div>
+
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-outline-secondary float-right w-100" id="load_graphcs">Gerar Gráficos</button>
+                        </div>
+                    </div>
+
                 </div>
 
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="id_hosts_multiple">
-                            Selecione um host
-                        </label>
-                        <select class="js-states form-control" id="id_hosts_multiple">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <button class="" id="load_graphcs">Carregar Gráficos</button>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -99,7 +136,8 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    <!-- Chart's container -->
+                    <div id="chart" style="height: 300px;"></div>
                 </div>
             </div>
         </div>
@@ -114,7 +152,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <!-- Charting library -->
+    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    <!-- Chartisan -->
+    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 
     {{-- Feedback ao usuário sobre a ação executada.  --}}
     @if (session('message') && session('status') )
@@ -132,28 +174,6 @@
         }
     </script>
     @endif
-
-    @php
-         $dataPoints = array(
-            array("x" => 946665000000, "y" => 3289000),
-            array("x" => 978287400000, "y" => 3830000),
-            array("x" => 1009823400000, "y" => 2009000),
-            array("x" => 1041359400000, "y" => 2840000),
-            array("x" => 1072895400000, "y" => 2396000),
-            array("x" => 1104517800000, "y" => 1613000),
-            array("x" => 1136053800000, "y" => 1821000),
-            array("x" => 1167589800000, "y" => 2000000),
-            array("x" => 1199125800000, "y" => 1397000),
-            array("x" => 1230748200000, "y" => 2506000),
-            array("x" => 1262284200000, "y" => 6704000),
-            array("x" => 1293820200000, "y" => 5704000),
-            array("x" => 1325356200000, "y" => 4009000),
-            array("x" => 1356978600000, "y" => 3026000),
-            array("x" => 1388514600000, "y" => 2394000),
-            array("x" => 1420050600000, "y" => 1872000),
-            array("x" => 1451586600000, "y" => 2140000)
-        );
-    @endphp
 
     <script>
         $("#id_group_hosts_multiple").select2({
@@ -241,6 +261,13 @@
 
         //
 
+    </script>
+
+    <script>
+        const chart = new Chartisan({
+            el: '#chart',
+            url: "@chart('sample_chart')",
+        });
     </script>
 
 

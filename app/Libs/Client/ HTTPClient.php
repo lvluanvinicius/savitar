@@ -22,6 +22,12 @@ class HTTPClient
         $this->zbxlocation = env('API_ZABBIX_JSONRPC_ROUTE');
         $this->zbxapikey = env('API_ZABBIX_KEY');
         $this->zbxversionrpc = env('API_ZABBIX_JSONRPC_VERSION');
+
+
+        /**
+         * Pertencente a Central King Voice
+         */
+        $this->ctllocation = env("CTL_ROUTE_LOCATION");
     }
 
     /**
@@ -31,7 +37,7 @@ class HTTPClient
      * @param Array $params
      * @return string
      */
-    private function zbx_http_accept(String $method, Array $params) 
+    private function zbx_http_accept(String $method, Array $params)
     {
         try {
             $responseData = Http::accept('application/json')->post($this->zbxlocation, [
@@ -41,11 +47,11 @@ class HTTPClient
                 "auth" => $this->zbxapikey,
                 "params" => $params
             ]);
-    
+
             return $responseData->json('result');
         } catch (Exception $err) {
             dd($err);
-        }        
+        }
     }
 
     /**
@@ -62,7 +68,7 @@ class HTTPClient
                 "name",
             ]
         ]);
-        
+
     }
 
     /**
@@ -95,5 +101,27 @@ class HTTPClient
             ],
             "templateids" => $template
         ]);
+    }
+
+
+    private function ctl_http_accept(String $route, Array $params)
+    {
+        try {
+            return Http::withoutVerifying()
+            ->withHeaders([
+                "token" => "8b0cf17e4429a7ee9d47c278c2ef6ce9",
+                "Content-Type" => "application/json"
+            ])
+            ->get($this->ctllocation . $route, $params)
+            ->json();
+
+        } catch (Exception $err) {
+            dd($err);
+        }
+    }
+
+    public function get_central_reports_attended($params)
+    {
+        return $this->ctl_http_accept("/estatistica_detalhada/relatorio", $params);
     }
 }

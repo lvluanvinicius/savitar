@@ -10,18 +10,24 @@
     <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
 @stop
 
-@section('content_header')
-<div class="row">
+{{-- @section('content_header')
+<div>
+    <h3>{{ $subtitle }}</h3>
+</div>
+@stop --}}
+
+@section('content')
+<div class="row pt-5">
     <div class="col-md-12">
         <div class="card">
 
             <div class="card-header">
-                <h3 class="card-title">Filtro para relatório</h3>
+                <h3 class="card-title"></h3>
             </div>
 
             <div class="card-body">
             <form action="{{ route('admin.central.reports.general') }}" method="get">
-            @csrf
+
 
                 <div class="row">
 
@@ -63,27 +69,20 @@
                     </div>
                     <!--/ Date and time range -->
 
-                    <div class="col-md-9">
-                        <div class="row">
+                    <div class="col-md-12">
+                        <div class="row ">
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Informe uma fila</label>
-                                    <input class="form-control" id="central-queues-filter" placeholder="Ex: 900"/>
+                                    <input class="form-control" id="central-queues-filter" name="queues_filter" placeholder="Ex: 900"/>
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Informe um agente</label>
-                                    <input class="form-control" id="central-agents-filter" placeholder="Ex: 900"/>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Informe uma fila</label>
-                                    <input class="form-control" id="central-queues-filter" placeholder="Ex: 900"/>
+                                    <input class="form-control" id="central-agents-filter" name="agents_filter" placeholder="Ex: Maria_Silva"/>
                                 </div>
                             </div>
 
@@ -104,20 +103,6 @@
         </div>
     </div>
 </div>
-
-@stop
-
-@section("content")
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Relatório</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 @stop
 
