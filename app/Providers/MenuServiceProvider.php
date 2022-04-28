@@ -66,17 +66,17 @@ class MenuServiceProvider extends ServiceProvider
                 'icon' => 'fas fa-fw fa-chart-area',
             ]);
 
-            $event->menu->add([
-                "text" => "report-central",
-                "icon" => "fas fa-fw fa-phone",                
-                "submenu" => [
-                    [
-                        "text" => "Atendimentos",
-                        "route" => 'admin.central.reports',
-                        "icon" => "",
-                    ]
-                ]
-            ]);
+            // $event->menu->add([
+            //     "text" => "report-central",
+            //     "icon" => "fas fa-fw fa-phone",
+            //     "submenu" => [
+            //         [
+            //             "text" => "Atendimentos",
+            //             "route" => 'admin.central.reports',
+            //             "icon" => "",
+            //         ]
+            //     ]
+            // ]);
 
             $event->menu->add(['header' => 'account_settings']); // Sessão de configurações de conta.
 

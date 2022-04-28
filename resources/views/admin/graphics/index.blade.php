@@ -105,7 +105,7 @@
                         <div class="form-group">
                             <label for="id_hosts_multiple">Selecione os gráficos</label>
 
-                            <select class="js-states form-control" id="id_hosts_multiple">
+                            <select class="js-states form-control" id="id_graphics">
                             </select>
 
                         </div>
@@ -114,7 +114,7 @@
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <button class="btn btn-outline-secondary float-right w-100" id="load_graphcs">Gerar Gráficos</button>
+                            <button class="btn btn-outline-secondary float-right w-100" id="load_reports">Gerar Gráficos</button>
                         </div>
                     </div>
 
@@ -255,6 +255,17 @@
         });
 
         //
+        $("#id_graphics").select2({
+            theme: "classic",
+            multiple: true,
+            width: 'resolve'
+        });
+
+        $("#load_reports").click(function (event) {
+            const hostsid = $("#id_graphics").val();
+            console.log(hostsid);
+
+        });
 
     </script>
 
