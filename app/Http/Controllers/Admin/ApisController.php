@@ -107,21 +107,23 @@ class ApisController extends Controller
     public function destroy(Request $request)
     {
         /// Verificar se tem permissão para exclusão..
-        if (!checkNivel(auth()->user()->id, "delete") || !checkNivel(auth()->user()->id, "*")) {
-            return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
-        }
+        if (checkNivel(auth()->user()->id, "delete") || checkNivel(auth()->user()->id, "*")) {
 
-        if (is_numeric($request->id)) {
-            $user = ApiKeys::where("id", $request->id)->first();
-            try {
-                if ($user->delete()) {
-                    return $this->success($this->getMessage("appsuccess", "SuccessDeleteApiKey"),  $code=200);
+            if (is_numeric($request->id)) {
+                $user = ApiKeys::where("id", $request->id)->first();
+                try {
+                    if ($user->delete()) {
+                        return $this->success($this->getMessage("appsuccess", "SuccessDeleteApiKey"),  $code=200);
+                    }
+                } catch (Exception $e) {
+                    return $this->error($this->getMessage("apperror", "ErrorNotExcludeApiKey"),  $code=400);
                 }
-            } catch (Exception $e) {
                 return $this->error($this->getMessage("apperror", "ErrorNotExcludeApiKey"),  $code=400);
             }
             return $this->error($this->getMessage("apperror", "ErrorNotExcludeApiKey"),  $code=400);
         }
-        return $this->error($this->getMessage("apperror", "ErrorNotExcludeApiKey"),  $code=400);
+
+        return $this->error($this->getMessage("apperror", "ErrorUnauthorizedRoute"),  $code=401);
+
     }
 }
