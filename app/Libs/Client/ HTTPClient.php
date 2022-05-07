@@ -7,9 +7,47 @@ use Illuminate\Support\Facades\Http;
 
 class HTTPClient
 {
-    //
-    protected $location;
-    protected $apikey;
+    /**
+     * Salva valor do link da Api do Zabbix.
+     *
+     * @var string
+     */
+    protected $zbxlocation;
+
+    /**
+     * Salva o valor da chave de acesso a Api do Zabbix.
+     *
+     * @var string
+     */
+    protected $zbxapikey;
+
+    /**
+     * Salva o valor da versão da Api do Zabbix.
+     *
+     * @var string
+     */
+    protected $zbxversionrpc;
+
+    /**
+     * Salva o link de acesso a Api da Central King Voice.
+     *
+     * @var string
+     */
+    protected $ctllocation;
+
+    /**
+     * Salva o link de acesso a Api do Opsgenie.
+     *
+     * @var string
+     */
+    protected $opglocation;
+
+    /**
+     * Salva o valor da chave de acesso a Opsgenie.
+     *
+     * @var string
+     */
+    protected $opgkey;
 
     /**
      * Iniciando valores globais.
@@ -28,10 +66,16 @@ class HTTPClient
          * Pertencente a Central King Voice
          */
         $this->ctllocation = env("CTL_ROUTE_LOCATION");
+
+        /**
+         * Pertencente ao Opsgenie
+         */
+        $this->opglocation = env("OPG_LOCATION");
+        $this->opgkey = env("OPG_KEY");
     }
 
     /**
-     * Undocumented function
+     * Controller Api Zabbix
      *
      * @param String $method
      * @param Array $params
@@ -104,6 +148,13 @@ class HTTPClient
     }
 
 
+    /**
+     * Api controller Central King Voice.
+     *
+     * @param String $route
+     * @param Array $params
+     * @return string
+     */
     private function ctl_http_accept(String $route, Array $params)
     {
         try {
@@ -120,14 +171,38 @@ class HTTPClient
         }
     }
 
+    /**
+     * Carregamento de estatisticas detalhadas.
+     *
+     * @param Array $params
+     * @return void
+     */
     public function get_central_reports_attended(Array $params)
     {
         return $this->ctl_http_accept("/estatistica_detalhada/relatorio", $params);
     }
 
-
+    /**
+     * Carregamento de estatisticas da fila.
+     *
+     * @param Array $params
+     * @return string
+     */
     public function get_central_report_queue_statistics(Array $params)
     {
         return $this->ctl_http_accept("/estatistica_fila/relatorio", $params);
+    }
+
+    public function opg_http_accept(string $route, $params)
+    {
+        try {
+            return Http::withoutVerifying()
+            ->withHeaders([
+                "token" => $this->opgkey,
+                "Content-Type" => "application/json"
+            ])->get($this->opglocation . $route, $params);
+        } catch (Exception $err) {
+            dd($err);
+        }
     }
 }
