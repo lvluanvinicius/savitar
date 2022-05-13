@@ -70,5 +70,7 @@ class Kernel extends HttpKernel
         'keypages' => \App\Http\Middleware\Pages\KeyPages::class,
         'reportspage' => \App\Http\Middleware\Pages\Reportspage::class,
         "centralpage" => \App\Http\Middleware\Pages\CentralPage::class,
+        "apidatacom" => \App\Http\Middleware\Api\DatacomRoutes::class,
+        "opg" => \App\Http\Middleware\Api\OpgMiddleware::class,
     ];
 }

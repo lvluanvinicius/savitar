@@ -13,6 +13,7 @@ class DatacomController extends Controller
 {
     use SSHBridge, LoadMessages, ApiResponser;
 
+    
     private function checkDocumentation($sshConsult)
     {
         // Se houver erro de comunicação.
@@ -75,7 +76,7 @@ class DatacomController extends Controller
 
         // Dados de retorno.
         $responseStatus = [
-            "TotalONUs" => $total,
+            "totalONUs" => $total,
             "totalUp"=> floatval(round((($totalUp/$total)*100), 2)),
             "totalDown" => floatval(round((($totalDown/$total)*100), 2)),
         ];
@@ -122,7 +123,6 @@ class DatacomController extends Controller
     {
         // Consulta.
         $sshConsult = $this->bridgeLoadAlarmsInPons($request);
-        $sshConsultOnus = $this->bridgeLoadPons($request);
 
         // Verifica se algum erro é gerado no resultado, de acordo com a Documentação de erros.
         $this->checkDocumentation($sshConsult);

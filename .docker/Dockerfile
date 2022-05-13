@@ -12,6 +12,8 @@ RUN apt-get install -y php8.0-ssh2 php-mysql php-xdebug php-curl phpunit php-zip
 RUN apt-get update && apt-get -y upgrade && apt-get install -y curl dirmngr apt-transport-https lsb-release ca-certificates && \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get -y install nodejs && apt-get install -y gcc g++ make && apt-get clean
 
+RUN apt install python3-pip && apt-get clean
+
 ADD ./.docker/api.conf /etc/apache2/sites-available/api.conf
 
 RUN a2dissite 000-default

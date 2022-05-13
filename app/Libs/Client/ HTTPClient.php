@@ -193,16 +193,24 @@ class HTTPClient
         return $this->ctl_http_accept("/estatistica_fila/relatorio", $params);
     }
 
-    public function opg_http_accept(string $route, $params)
+    private function opg_http_accept(string $route, Array $params)
     {
         try {
             return Http::withoutVerifying()
             ->withHeaders([
-                "token" => $this->opgkey,
+                "Authorization" => "GenieKey $this->opgkey",
                 "Content-Type" => "application/json"
-            ])->get($this->opglocation . $route, $params);
+            ])->get($this->opglocation . $route, $params)
+            ->json();
         } catch (Exception $err) {
             dd($err);
         }
+    }
+
+    //
+    public function get_reports_alerts(Array $params)
+    {
+        // dd($this->opg_http_accept("/alerts", $params));
+        return $this->opg_http_accept("/alerts", $params);
     }
 }
