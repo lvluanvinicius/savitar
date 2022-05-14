@@ -31,7 +31,7 @@
         <div class="card-body">
             <div class="row">
 
-                <div class="col-md-3 row">
+                <div class="col-md-4 row">
 
                     <div class="col-md-12">
                         <div class="form-group">
@@ -56,7 +56,7 @@
 
                 </div>
 
-                <div class="col-md-3 row">
+                <div class="col-md-4 row">
 
                     <div class="col-md-12">
                         <div class="form-group">
@@ -78,7 +78,7 @@
                 </div>
 
 
-                <div class="col-md-3 row">
+                <div class="col-md-4 row">
 
                     <div class="col-md-12">
                         <div class="form-group">
@@ -99,13 +99,13 @@
 
                 </div>
 
-                <div class="col-md-3 row">
+                <div class="col-md-12 row">
 
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="id_hosts_multiple">Selecione os gráficos</label>
 
-                            <select class="js-states form-control" id="id_graphics">
+                            <select class="js-states form-control" id="id_graphics_multiple">
                             </select>
 
                         </div>
@@ -227,7 +227,6 @@
                 },
                 success: function (response) {
                     try {
-                        console.log(response);
                         $("#id_hosts_multiple").empty();
                         for (let ind = 0; ind < response.length; ind++ ) {
                             $("#id_hosts_multiple").append(
@@ -249,20 +248,44 @@
         });
 
         $("#load_graphcs").click(function (event) {
-            const hostsid = $("#id_hosts_multiple").val();
-            console.log(hostsid);
+            const hostids = $("#id_hosts_multiple").val();
+            
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('admin.graphcs.load.graphics') }}",
+                headers : {
+                    'X-CSRF-TOKEN' : $("meta[name='csrf-token']").attr("content")
+                },
+                data: {
+                    hostids
+                },
+                success: function (response) {
+                    try {
+                        $("#id_graphics_multiple").empty();
+                        console.log(response);
+                        for (let ind = 0; ind < response.length; ind++ ) {
+                            $("#id_graphics_multiple").append(
+                                    `<option value="${response[ind].graphid}">${response[ind].name}</option>`);
+                        }
+                    } catch (error) {
+                        console.log('====================================');
+                        console.log(error);
+                        console.log('====================================');
+                    }
+                }
+            });
 
         });
 
         //
-        $("#id_graphics").select2({
+        $("#id_graphics_multiple").select2({
             theme: "classic",
             multiple: true,
             width: 'resolve'
         });
 
         $("#load_reports").click(function (event) {
-            const hostsid = $("#id_graphics").val();
+            const hostsid = $("#id_graphics_multiple").val();
             console.log(hostsid);
 
         });

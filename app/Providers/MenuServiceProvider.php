@@ -57,14 +57,14 @@ class MenuServiceProvider extends ServiceProvider
                 ]);
             }
 
-            // $event->menu->add(['header' => 'reports']); // Sessão de relatórios.
+            $event->menu->add(['header' => 'reports']); // Sessão de relatórios.
 
             // Insere link de acesso a página de graficos.
-            // $event->menu->add([
-            //     'text' => 'graphics-reports',
-            //     'route'  => 'admin.graphcs.reports',
-            //     'icon' => 'fas fa-fw fa-chart-area',
-            // ]);
+            $event->menu->add([
+                'text' => 'graphics-reports',
+                'route'  => 'admin.graphcs.reports',
+                'icon' => 'fas fa-fw fa-chart-area',
+            ]);
 
             // $event->menu->add([
             //     "text" => "report-central",

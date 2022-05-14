@@ -38,4 +38,14 @@ class GraphicsReportsController extends Controller
 
         return $httpClient->get_hosts($params["templateids"]);
     }
+
+    public function getGraphics(Request $request)
+    {
+        //
+        $params = $request->all();
+
+        $httpClient = new HTTPClient;
+
+        return $httpClient->get_graphics($params["hostids"]);
+    }
 }

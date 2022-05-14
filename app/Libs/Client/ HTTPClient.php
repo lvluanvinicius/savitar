@@ -147,6 +147,22 @@ class HTTPClient
         ]);
     }
 
+    /**
+     * Carregamento de gráficos
+     *
+     * @param string $hosts
+     * @return string
+     */
+    public function get_graphics($hosts)
+    {
+        return $this->zbx_http_accept("graph.get", [
+            "output" => "extend",
+            "hostids" => $hosts
+        ]);
+    }
+    
+
+    /** ======================================================================================================= */
 
     /**
      * Api controller Central King Voice.

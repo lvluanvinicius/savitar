@@ -99,6 +99,7 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             Route::get("graphics-reports", [App\Http\Controllers\Admin\GraphicsReportsController::class, "index"])->name('admin.graphcs.reports');
             Route::post("graphics-load-templates", [App\Http\Controllers\Admin\GraphicsReportsController::class, "getTemplates"])->name('admin.graphcs.load.templates');
             Route::post("graphics-load-hosts", [App\Http\Controllers\Admin\GraphicsReportsController::class, "getHosts"])->name('admin.graphcs.load.hosts');
+            Route::post("graphics-load-graphics", [App\Http\Controllers\Admin\GraphicsReportsController::class, "getGraphics"])->name('admin.graphcs.load.graphics');
         });
 
 
