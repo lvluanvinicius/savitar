@@ -106,7 +106,6 @@ class HTTPClient
     public function get_group_hosts()
     {
         return $this->zbx_http_accept("hostgroup.get", [
-            "monitored_hosts" => true,
             "output" => [
                 "groupid",
                 "name",
@@ -121,45 +120,54 @@ class HTTPClient
      * @param string $groupids
      * @return string
      */
-    public function get_templates($groupids)
+    public function get_templates(Array $params)
     {
-        return $this->zbx_http_accept("template.get", [
-            "output" => [
-                "host", "name", "templateid"
-            ],
-            "groupids" => $groupids
-        ]);
+        return $this->zbx_http_accept("template.get", $params=$params);
     }
 
     /**
      * Carregamento de hosts
      *
-     * @param string $template
+     * @param Array $params
      * @return string
      */
-    public function get_hosts($template)
+    public function get_hosts($params)
     {
-        return $this->zbx_http_accept("host.get", [
-            "output" => [
-                "hostid", "host", "name"
-            ],
-            "templateids" => $template
-        ]);
+        return $this->zbx_http_accept("host.get", $params=$params);
+    }
+
+    /**
+     * Carregamento de gráficos
+     * 
+     * @param Array $params
+     * @return string
+     */
+    public function get_graphics(Array $params)
+    {
+        return $this->zbx_http_accept("graph.get", $params=$params);
+    }
+
+    /**
+     * Carregamento de Items
+     *
+     * @param Array $params
+     * @return void
+     */
+    public function get_items(Array $params)
+    {
+        return $this->zbx_http_accept("item.get", $params=$params);
     }
 
     /**
      * Carregamento de gráficos
      *
-     * @param string $hosts
+     * @param Array $params
      * @return string
      */
-    public function get_graphics($hosts)
+    public function get_history(Array $params)
     {
-        return $this->zbx_http_accept("graph.get", [
-            "output" => "extend",
-            "hostids" => $hosts
-        ]);
-    }
+        return $this->zbx_http_accept("history.get", $params=$params);
+    }    
     
 
     /** ======================================================================================================= */

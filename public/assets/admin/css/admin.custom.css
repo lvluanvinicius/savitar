@@ -29,7 +29,7 @@ table tr {
  /* End tables ------------------------- */
 
 /* Start profile -------------------------*/
- .h-divider-list-token{
+ .h-divider-list-token {
     margin-top:8px;
     margin-bottom:8px;
     height:1px;
@@ -74,11 +74,17 @@ table tr {
     margin-left: 10px;
 }
 
+/* Start Reports Zabbix -------------------------*/
+#id_group_hosts_multiple {
+}
+.zbx-btn-loads {
+}
+
+/* Start Reports Zabbix -------------------------*/
+
 
 /* Start Reports Central -------------------------*/
-.float-right-central-range {
-    border: 1px red solid;
-}
+
 
 /* End Reports Central -------------------------*/
 
