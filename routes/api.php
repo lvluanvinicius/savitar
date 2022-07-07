@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, "login"])->name("api.login");
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
     // DatacomController Group
     Route::middleware("apidatacom")->group(function () {
         Route::post("ssh-load-pons/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"])->name("api.ssh-load-pons");
@@ -28,7 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // OPGController Group
-    Route::middleware("opg")->group(function () {
-        Route::post("opg-get-alerts", [\App\Http\Controllers\Api\OPGController::class, "getAlerts"])->name("api.get-alarms");
-    });
+    // Route::middleware("opg")->group(function () {
+    //     Route::post("opg-get-alerts", [\App\Http\Controllers\Api\OPGController::class, "getAlertsBkp"])->name("api.get-alarms");
+    //     //
+    // });
 });

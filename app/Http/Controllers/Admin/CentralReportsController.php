@@ -49,4 +49,12 @@ class CentralReportsController extends Controller
             "subtitle" => "Relatórios"
         ]);
     }
+
+    public function pageTesteBi(Request $request)
+    {
+        return view("admin.central.bi")->with([
+            "title" => "Relatórios BI | " . env("APP_NAME"),
+            "subtitle" => "Central Report"
+        ]);
+    }
 }

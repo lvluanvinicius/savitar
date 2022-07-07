@@ -108,43 +108,43 @@
 
 
 @section("js")
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script type="text/javascript">
-    $(function() {
+    <script type="text/javascript">
+        $(function() {
 
-        var start = moment().subtract(29, 'days');
-        var end = moment();
+            var start = moment().subtract(29, 'days');
+            var end = moment();
 
-        function cb(start, end) {
-            $('#central-reports-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-
-        $('#central-reports-range').daterangepicker({
-            showDropdowns: true,
-            timePicker: true,
-            startDate: moment().startOf('hour'),
-            endDate: moment().startOf('hour').add(32, 'hour'),
-            minYear: 2000,
-            ranges: {
-                'Hoje': [moment(), moment()],
-                'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
-                'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
-                'Esse mês': [moment().startOf('month'), moment().endOf('month')],
-                'Último mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            },
-            locale: {
-                "customRangeLabel": "Customizar data",
+            function cb(start, end) {
+                $('#central-reports-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             }
-        }, cb);
 
-        cb(start, end);
+            $('#central-reports-range').daterangepicker({
+                showDropdowns: true,
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                minYear: 2000,
+                ranges: {
+                    'Hoje': [moment(), moment()],
+                    'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                    'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                    'Esse mês': [moment().startOf('month'), moment().endOf('month')],
+                    'Último mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                locale: {
+                    "customRangeLabel": "Customizar data",
+                }
+            }, cb);
 
-    });
-</script>
+            cb(start, end);
+
+        });
+    </script>
 @stop

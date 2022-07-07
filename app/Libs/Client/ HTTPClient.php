@@ -138,7 +138,7 @@ class HTTPClient
 
     /**
      * Carregamento de gráficos
-     * 
+     *
      * @param Array $params
      * @return string
      */
@@ -167,8 +167,8 @@ class HTTPClient
     public function get_history(Array $params)
     {
         return $this->zbx_http_accept("history.get", $params=$params);
-    }    
-    
+    }
+
 
     /** ======================================================================================================= */
 
@@ -216,6 +216,9 @@ class HTTPClient
     {
         return $this->ctl_http_accept("/estatistica_fila/relatorio", $params);
     }
+
+
+    /** ======================================================================================================= */
 
     private function opg_http_accept(string $route, Array $params)
     {

@@ -78,28 +78,42 @@ class GraphicsReportsController extends Controller
         //
         $httpClient = new HTTPClient;
 
-        // 
+        //
         $graphcs = [];
 
         //
-        foreach ($params["graphicsid"] as $graph) {
-            $graphItem = $httpClient->get_graphics([
-                "output" => ["graphid", "name", "ymax_itemid"],
-                "graphids" => $graph
-            ]);
+        $graphItem = $httpClient->get_graphics([
+            "output" => ["graphid", "name", "ymax_itemid"],
+            "graphids" => $params["graphicsid"][0]
+        ]);
 
-            $histories = $httpClient->get_history([
-                "output" => "extend",
-                "itemids" => strval($graphItem[0]["ymax_itemid"]),
-                "time_from" => strtotime($params["time_from"]),
-                "time_till" => strtotime($params["time_till"])
-            ]);
+        return $graphItem[0]["graphid"];
 
-            return $histories;
+        $histories = $httpClient->get_history([
+            "output" => "extend",
+            "itemids" => strval($graphItem[0]["ymax_itemid"]),
+            "time_from" => strtotime($params["time_from"]),
+            "time_till" => strtotime($params["time_till"])
+        ]);
 
-            // array_push($graphcs, $histories);
-        }
+        return $histories;
 
-        return $graphcs;
+        // foreach ($params["graphicsid"] as $graph) {
+        //     $graphItem = $httpClient->get_graphics([
+        //         "output" => ["graphid", "name", "ymax_itemid"],
+        //         "graphids" => $graph
+        //     ]);
+
+        //     $histories = $httpClient->get_history([
+        //         "output" => "extend",
+        //         "itemids" => strval($graphItem[0]["ymax_itemid"]),
+        //         "time_from" => strtotime($params["time_from"]),
+        //         "time_till" => strtotime($params["time_till"])
+        //     ]);
+
+        //     array_push($graphcs, $histories);
+        // }
+
+        // return $graphcs;
     }
 }

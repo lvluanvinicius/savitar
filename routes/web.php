@@ -21,22 +21,22 @@ use Illuminate\Support\Facades\Hash;
 
 Route::get("tmp", function () {
 
-    // $gp = new UsersGroups();
-    // $gp->gname = "administrator";
-    // $gp->permissions = '["*"]';
-    // $gp->save();
+   /* $gp = new UsersGroups();
+    $gp->gname = "administrator";
+    $gp->permissions = '["*"]';
+    $gp->save();*/
 
     // $related = new GroupsRelated();
     // $related->id_user = 1;
     // $related->id_group_users = 1;
     // $related->save();
 
-    // $user = new User();
-    // $user->name = "Luan Santos";
-    // $user->email = "luan@teste.com";
-    // $user->password = Hash::make("1234");
-    // $user->last_access_login = date('Y-m-d H:i:s');
-    // $user->save();
+    /*$user = new User();
+    $user->name = "Luan Santos";
+    $user->email = "luan@teste.com";
+    $user->password = Hash::make("1234");
+    $user->last_access_login = date('Y-m-d H:i:s');
+    $user->save();*/
 });
 
 Route::get('/', function () {
@@ -107,6 +107,7 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
         Route::middleware("centralpage")->group(function () {
             Route::get("central", [App\Http\Controllers\Admin\CentralReportsController::class, "index"])->name('admin.central.reports');
             Route::get("central-reports-graphs", [App\Http\Controllers\Admin\CentralReportsController::class, "generalReportsGraphs"])->name('admin.central.reports.general');
+            Route::get("central-reports-bi", [App\Http\Controllers\Admin\CentralReportsController::class, "pageTesteBi"])->name('admin.central.reports.bi');
         });
 
     });
