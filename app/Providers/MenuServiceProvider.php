@@ -64,9 +64,14 @@ class MenuServiceProvider extends ServiceProvider
                 "icon" => "fas fa-fw fa-phone",
                 "submenu" => [
                     [
-                        "text" => "Coletas de PONS",
+                        "text" => "reports-graph",
+                        "route" => 'admin.collections.dbms.dashboard',
+                        "icon" => "fas fa-fw fa-chart-bar"
+                    ],
+                    [
+                        "text" => "collections-dbm-show",
                         "route" => 'admin.collections.dbms.pons',
-                        "icon" => "fas fa-fw fa-chart-pie",
+                        "icon" => "fas fa-fw fa-list",
                     ]
                 ]
             ]);

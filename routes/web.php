@@ -113,7 +113,8 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
 
         // CollectionsControllers
         Route::middleware("collections")->group(function () {
-            Route::get("collections-dbms-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "index"])->name("admin.collections.dbms.pons");
+            Route::get("collections-dbms-dashboard", [App\Http\Controllers\Admin\CollectionsControllers::class, "dashboard"])->name("admin.collections.dbms.dashboard");
+            Route::get("collections-dbms-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_dbm_collections"])->name("admin.collections.dbms.pons");
         });
 
     });
