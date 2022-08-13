@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware("apidatacom")->group(function () {
         Route::post("ssh-load-pons/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadPons"])->name("api.ssh-load-pons");
         Route::post("ssh-discovery-pons-datacom", [\App\Http\Controllers\Api\DatacomController::class, "discoveryPonsDatacom"])->name("api.ssh-discovery-pons-datacom");
-        Route::post("ssh-load-pons-alarms/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadAlarmsInPons"])->name("api.ssh-load-pons-alarms");
+        //Route::post("ssh-load-pons-alarms/{ponid}", [\App\Http\Controllers\Api\DatacomController::class, "loadAlarmsInPons"])->name("api.ssh-load-pons-alarms");
     });
 
     // OPGController Group

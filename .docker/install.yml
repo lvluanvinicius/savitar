@@ -1,6 +1,6 @@
 services:
   api-zabbix:
-    container_name: Teste
+    container_name: api_server_laravel
     build:
       context: ../
       dockerfile: ./.docker/Dockerfile

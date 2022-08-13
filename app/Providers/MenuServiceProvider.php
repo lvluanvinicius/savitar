@@ -59,6 +59,18 @@ class MenuServiceProvider extends ServiceProvider
 
             $event->menu->add(['header' => 'reports']); // Sessão de relatórios.
 
+            $event->menu->add([
+                "text" => "dbm-reports",
+                "icon" => "fas fa-fw fa-phone",
+                "submenu" => [
+                    [
+                        "text" => "Coletas de PONS",
+                        "route" => 'admin.collections.dbms.pons',
+                        "icon" => "fas fa-fw fa-chart-pie",
+                    ]
+                ]
+            ]);
+
             // Insere link de acesso a página de graficos.
             // $event->menu->add([
             //     'text' => 'graphics-reports',
