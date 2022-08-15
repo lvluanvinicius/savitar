@@ -114,7 +114,14 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
         // CollectionsControllers
         Route::middleware("collections")->group(function () {
             Route::get("collections-dbms-dashboard", [App\Http\Controllers\Admin\CollectionsControllers::class, "dashboard"])->name("admin.collections.dbms.dashboard");
+            Route::get("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");
+            Route::get("collections-olt-config-update", [App\Http\Controllers\Admin\CollectionsControllers::class, "update_olt_config"])->name("admin.collections.olt.config.update");
             Route::get("collections-dbms-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_dbm_collections"])->name("admin.collections.dbms.pons");
+
+            // Save Export Datacom File and Save in DBM.
+            Route::put("collections-dbms-pons-upload-export", [App\Http\Controllers\Admin\CollectionsControllers::class, "save_dbm_collections"])->name("admin.collections.dbms.pons.upload.export");
+
+            // Route::delete("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");
         });
 
     });

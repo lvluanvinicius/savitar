@@ -25,6 +25,9 @@ Trait AppMessages {
         "SuccessAddUserGroup" => "Grupo criado com sucesso.",
         "SuccessDeleteUserGroup" => "Grupo de Usuário excluído com sucesso.",
         "SuccessUpdateUserGroup" => "Grupo de Usuário atualizado com sucesso.",
+
+        // Collections
+        "SuccessUploadFile" => "Arquivo salvo com sucesso.",
     ];
 
      /**
@@ -73,5 +76,8 @@ Trait AppMessages {
 
         // Apis Keys
         "ErrorNotExcludeApiKey" => "Falha na exclusão da api ou ela não foi encontrada.",
+
+        // Collections
+        "ErrorFileNotInformed" => "Arquivo não informado.",
     ];
 }

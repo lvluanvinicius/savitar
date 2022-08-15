@@ -64,9 +64,14 @@ class MenuServiceProvider extends ServiceProvider
                 "icon" => "fas fa-fw fa-phone",
                 "submenu" => [
                     [
-                        "text" => "reports-graph",
+                        "text" => "collections-dbm-dashboard",
                         "route" => 'admin.collections.dbms.dashboard',
                         "icon" => "fas fa-fw fa-chart-bar"
+                    ],
+                    [
+                        "text" => "collections-olt-show",
+                        "route" => 'admin.collections.olt.config',
+                        "icon" => "fas fa-fw fa-list"
                     ],
                     [
                         "text" => "collections-dbm-show",

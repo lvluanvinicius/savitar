@@ -9,64 +9,6 @@
 @stop
 
 
-@section('content_header')
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="row">
-
-                <div class="col-md-9">
-                </div>
-
-                <div class="col-md-3">
-                    <div class="btn-actions-table-group">
-                        <x-btn-actions-tables classIcon="fa fa-upload" name="Novo"  nameModal="#modal-new-collection" nameId/>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="modal-new-collection">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <h4 class="modal-title">Carregar Export</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <form action="{{ route('admin.collections.dbms.pons.upload.export') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <input type="file" name="data_file"/>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit">Salvar</button>
-                    </div>
-
-                </div>
-            </form>
-
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-@stop
-
-
 @section('content')
 <div class="row mt-3">
     <div class="col-12">
@@ -78,19 +20,32 @@
                     <thead>
                         <tr>
                             <th>Nome Equipamento</th>
-                            <th>GPon</th>
-                            <th>Média de DBM</th>
-                            <th>Data de Coleta</th>
+                            <th>Pons</th>
+                            <th>Data de Criação</th>
+                            <th>Data de Atualização</th>
+                            <th></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($dbm_collections as $collec)
+                        @foreach ($olts as $olt)
                             <tr>
-                                <td>{{ $collec->OLT_NAME }}</td>
-                                <td>{{ $collec->PON }}</td>
-                                <td>{{ $collec->DBM_AVERAGE }}</td>
-                                <td>{{ convetDateString($collec->created_at) }}</td>
+                                <td>{{ $olt->OLT_NAME }}</td>
+                                <td>{{ $olt->PONS }}</td>
+                                <td>{{ convetDateCreated($olt->updated_at) }}</td>
+                                <td>{{ convetDateUpdated($olt->updated_at) }}</td>
+                                <td>
+                                    <div class="actions-buttons-group">
+                                        <div>
+                                            <x-actions troute="admin.collections.olt.config.update"
+                                            ticonAndClass="fa fa-edit text-info" iduser="{{ $olt->id }}" />
+                                        </div>
+                                        {{--  <div>
+                                            <x-actions troute="admin." ticonAndClass="fa fa-trash text-danger"
+                                            methodText="DELETE" iduser="{{ $olt->id }}" />
+                                        </div>  --}}
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
