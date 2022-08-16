@@ -36,6 +36,18 @@ class CollectionsControllers extends Controller
         ]);
     }
 
+    public function create_olt_config(Request $request)
+    {
+        dd($request->all());
+        // $olt = OltConfig::where('id', "=", $request->id);
+    }
+
+    public function update_olt_config(Request $request)
+    {
+        dd($request->id);
+        // $olt = OltConfig::where('id', "=", $request->id);
+    }
+
     /**
      * Carregamento de coletas de DBM.
      *
@@ -63,13 +75,6 @@ class CollectionsControllers extends Controller
             "dbm_collections" => $dbm,
             "imports_tasks" => $imports_tasks
         ]);
-    }
-
-
-    public function update_olt_config(Request $request)
-    {
-        dd($request->id);
-        // $olt = OltConfig::where('id', "=", $request->id);
     }
 
 
@@ -117,7 +122,7 @@ class CollectionsControllers extends Controller
         if ($task->finished != 0) return $this->getMessage("apperror", "ErrorTaskAlreadyPerformed");
 
         try {
-            $process = new Process(["python3", "/var/www/html/scripts/main.py", "data/1660612628-DATACOM.csv"]);
+            $process = new Process(["python3", "/var/www/html/scripts/main.py", $task->path]);
             $process->run();
 
             if (!$process->isSuccessful()) {
@@ -128,9 +133,12 @@ class CollectionsControllers extends Controller
                 "finished" => 1
             ]);
 
+            // return $process->getOutput();
+
             return $this->getMessage("appsuccess", "SuccessExecuteTask");
         } catch (Exception $err) {
-            throw new Error($err);
+            return $err->getMessage();
+            // throw new Error($err);
         }
     }
 

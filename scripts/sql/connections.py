@@ -8,9 +8,9 @@ class MysqlConnection(object):
 
     def __init__(self):
         self.USERNAME = "root"
-        self.PASSWORD = "root"
-        self.PORT = "3306"
-        self.HOST = "0.0.0.0"
+        self.PASSWORD = "965700"
+        self.PORT = "33061"
+        self.HOST = "10.254.192.212"
         self.DATABASE = "api_report"
 
     def __str__(self):

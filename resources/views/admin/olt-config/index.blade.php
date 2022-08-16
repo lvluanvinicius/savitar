@@ -9,6 +9,79 @@
 @stop
 
 
+@section('content_header')
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="row">
+
+            <div class="col-md-9">
+            </div>
+
+            <div class="col-md-3">
+                <div class="btn-actions-table-group">
+                    <x-btn-actions-tables classIcon="fa fa-upload" name="Novo exports "  nameModal="#modal-new-olt" nameId/>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modal-new-olt">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Criar OLT</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form action="{{ route('admin.collections.olt.config.create') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="modal-body">
+
+                <div class="form-group col-12">
+
+                </div>
+
+                <div class="col-12 row">
+                    <div class="col-6 form-group">
+                        <label for="name">Nome:
+                            <small class="text-danger">(Não pode conter espaços)</small>
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="EX: CIDADE-OLT1-DATACOM">
+
+                    </div>
+
+                    <div class="col-6">
+                        <label for="email">Total de portas</label>
+                        <input type="number" class="form-control" id="pons" name="pons" placeholder="Total de portas">
+                    </div>
+
+                </div>
+                <div class="col-12 form-group text-right">
+                    <input type="submit" class="btn btn-primary mr-3" name="save_olt" value="Salvar Equipamento">
+                </div>
+
+            </div>
+        </form>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+@endsection
+
+
 @section('content')
 <div class="row mt-3">
     <div class="col-12">

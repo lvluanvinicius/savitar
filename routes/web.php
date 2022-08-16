@@ -118,10 +118,13 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             Route::get("collections-olt-config-update", [App\Http\Controllers\Admin\CollectionsControllers::class, "update_olt_config"])->name("admin.collections.olt.config.update");
             Route::get("collections-dbms-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_dbm_collections"])->name("admin.collections.dbms.pons");
 
+            // Create new OLT.
+            Route::put("collections-olt-config-create", [App\Http\Controllers\Admin\CollectionsControllers::class, "create_olt_config"])->name("admin.collections.olt.config.create");
+
             // Save Export Datacom File and Save in DBM.
             Route::put("collections-dbms-pons-upload-export", [App\Http\Controllers\Admin\CollectionsControllers::class, "save_dbm_collections"])->name("admin.collections.dbms.pons.upload.export");
 
-
+            // Executa uma importação ao banco de dados.
             Route::post("collections-dbms-pons-imports-execute", [App\Http\Controllers\Admin\CollectionsControllers::class, "execute_dbm_import_task"])->name("admin.collections.dbms.pons.import.execute");
 
             // Route::delete("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");

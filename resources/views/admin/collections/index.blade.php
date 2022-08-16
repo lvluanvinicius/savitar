@@ -227,6 +227,8 @@
 
         function executeImportTasks(idITask)
         {
+            toastr.warning(`Ação enviada para execução, por favor, aguarde e atualize a página.`);
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
