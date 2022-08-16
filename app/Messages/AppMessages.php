@@ -28,6 +28,7 @@ Trait AppMessages {
 
         // Collections
         "SuccessUploadFile" => "Arquivo salvo com sucesso.",
+        "SuccessExecuteTask" => "Tarefa executado com sucesso.",
     ];
 
      /**
@@ -79,5 +80,6 @@ Trait AppMessages {
 
         // Collections
         "ErrorFileNotInformed" => "Arquivo não informado.",
+        "ErrorTaskAlreadyPerformed" => "Tarefa já foi executada, por favor, atualize a página.",
     ];
 }

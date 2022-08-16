@@ -121,6 +121,9 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             // Save Export Datacom File and Save in DBM.
             Route::put("collections-dbms-pons-upload-export", [App\Http\Controllers\Admin\CollectionsControllers::class, "save_dbm_collections"])->name("admin.collections.dbms.pons.upload.export");
 
+
+            Route::post("collections-dbms-pons-imports-execute", [App\Http\Controllers\Admin\CollectionsControllers::class, "execute_dbm_import_task"])->name("admin.collections.dbms.pons.import.execute");
+
             // Route::delete("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");
         });
 

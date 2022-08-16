@@ -80,10 +80,7 @@ table tr {
 .zbx-btn-loads {
 }
 
-/* Start Reports Zabbix -------------------------*/
 
-
-/* Start Reports Central -------------------------*/
-
-
-/* End Reports Central -------------------------*/
+#loading-execute {
+    position: absolute;
+}

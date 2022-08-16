@@ -16,11 +16,14 @@
             <div class="row">
 
                 <div class="col-md-9">
+                    {{--  {{ $imports_tasks }}  --}}
+                    <x-btn-actions-tables classIcon="fa fa-tasks" name="Arquivos pendentes" nameModal="#modal-list-imports-tasks" nameId/>
+
                 </div>
 
                 <div class="col-md-3">
                     <div class="btn-actions-table-group">
-                        <x-btn-actions-tables classIcon="fa fa-upload" name="Novo"  nameModal="#modal-new-collection" nameId/>
+                        <x-btn-actions-tables classIcon="fa fa-upload" name="Novo exports "  nameModal="#modal-new-collection" nameId/>
                     </div>
                 </div>
 
@@ -28,6 +31,65 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="modal-list-imports-tasks">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Execuções pendentes</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+            </div>
+
+            <div class="">
+                <div  class="card">
+                    <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="" class="table table-bordered table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Nome do Arquivo</th>
+                                <th>Path</th>
+                                <th>Criado</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($imports_tasks as $ITasks)
+                                <tr>
+                                    <td>{{ $ITasks->name_file }}</td>
+                                    <td>{{ $ITasks->path }}</td>
+                                    <td>{{ convetDateCreated($ITasks->created_at) }}</td>
+                                    <td>
+                                        <div class="actions-buttons-group">
+                                            <div>
+                                                <i class="fa fa-play-circle text-primary" style="cursor: pointer"
+                                                    onclick="executeImportTasks({{ $ITasks->id }})"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+                    <!-- /.card-body -->
+            </div>
+        <!-- /.card -->
+            </div>
+
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal import tasks -->
 
 
     <div class="modal fade" id="modal-new-collection">
@@ -102,6 +164,12 @@
     <!-- /.card -->
     </div>
 </div>
+
+@if (count($imports_tasks) >= 1)
+    <div class="alert alert-primary" role="alert">
+        Existe taréfas pendentes, por favor, verifique e as execute!
+    </div>
+@endif
 @endsection
 
 
@@ -147,5 +215,35 @@
                 },
             });
         } );
+    </script>
+
+    <script>
+        totTasks = "{{ count($imports_tasks) }}";
+
+        if (totTasks >= 1)
+        {
+            toastr.info(`Existem ${totTasks} pendentes!`);
+        }
+
+        function executeImportTasks(idITask)
+        {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('admin.collections.dbms.pons.import.execute') }}",
+                data: {idITask},
+                success: function (response) {
+                    toastr.success(response)
+                },
+                error: function (response) {
+                    toastr.success(response)
+                }
+            });
+        }
     </script>
 @endsection
