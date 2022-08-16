@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Charts\GponsCharts;
 use App\Http\Controllers\Controller;
 use App\Models\AverageDBM;
 use App\Models\ImportDBTask;
@@ -11,8 +12,10 @@ use App\Traits\LoadMessages;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
+use PDOException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+
 
 class CollectionsControllers extends Controller
 {
@@ -20,9 +23,11 @@ class CollectionsControllers extends Controller
 
     public function dashboard()
     {
+        $olts = OltConfig::get();
 
         return view("admin.collections-dashboard.index")->with([
-            "title" => "DBM Dashboard | " . env("APP_NAME")
+            "title" => "DBM Dashboard | " . env("APP_NAME"),
+            "olts" => $olts
         ]);
     }
 
@@ -36,10 +41,35 @@ class CollectionsControllers extends Controller
         ]);
     }
 
+    public function get_olts_and_pons(Request $request)
+    {
+        $olts = OltConfig::whereIn("id", $request->olts)->get();
+        $dbms = AverageDBM::whereIn("ID_OLT", $request->olts)->get();
+
+        $graphPons = new GponsCharts;
+
+
+        return $dbms;
+    }
+
     public function create_olt_config(Request $request)
     {
-        dd($request->all());
-        // $olt = OltConfig::where('id', "=", $request->id);
+
+        try {
+            $olt = OltConfig::create([
+                "OLT_NAME" => str_replace(" ", "-", $request->name),
+                "PONS" => $request->pons
+            ]);
+
+            // Retornando resposta ao usuário.
+            return $this->success($this->getMessage("appsuccess", "SuccessEquipmentSaved"),  $code=200);
+
+        } catch (\PDOException $err) {
+            if (str_contains($err->getMessage(), "1062 Duplicate entry") )
+                return $this->error($this->getMessage("apperror", "ErrorEquipmentAlreadyExists"),  $code=400);;
+        }
+
+
     }
 
     public function update_olt_config(Request $request)
@@ -63,12 +93,6 @@ class CollectionsControllers extends Controller
                 })->get();
 
         $imports_tasks = ImportDBTask::where("finished", "=", 0)->get();
-
-
-        // $dbm = DB::table('pons_average_dbm')
-        //     ->join('olt_config', function () {
-
-        //     });
 
         return view("admin.collections.index")->with([
             "title" => "DBM Coleções | " . env("APP_NAME"),
@@ -122,7 +146,7 @@ class CollectionsControllers extends Controller
         if ($task->finished != 0) return $this->getMessage("apperror", "ErrorTaskAlreadyPerformed");
 
         try {
-            $process = new Process(["python3", "/var/www/html/scripts/main.py", $task->path]);
+            $process = new Process(["python3", env("PATH_SCRIPTS") . "main.py", $task->path]);
             $process->run();
 
             if (!$process->isSuccessful()) {

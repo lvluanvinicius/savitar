@@ -29,6 +29,7 @@ Trait AppMessages {
         // Collections
         "SuccessUploadFile" => "Arquivo salvo com sucesso.",
         "SuccessExecuteTask" => "Tarefa executado com sucesso.",
+        "SuccessEquipmentSaved" => "Equipamento salvo com sucesso.",
     ];
 
      /**
@@ -81,5 +82,6 @@ Trait AppMessages {
         // Collections
         "ErrorFileNotInformed" => "Arquivo não informado.",
         "ErrorTaskAlreadyPerformed" => "Tarefa já foi executada, por favor, atualize a página.",
+        "ErrorEquipmentAlreadyExists" => "Equipamento Já cadastrado. Consulte o que existe e tente novamente com um nome diferente.",
     ];
 }

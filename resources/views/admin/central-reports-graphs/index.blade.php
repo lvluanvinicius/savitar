@@ -26,7 +26,6 @@
             </div>
 
             <div class="card-body">
-                <!-- Chart's container -->
                 <div id="content-graphics">
                 </div>
             </div>

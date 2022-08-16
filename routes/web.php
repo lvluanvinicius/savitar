@@ -128,6 +128,11 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
             Route::post("collections-dbms-pons-imports-execute", [App\Http\Controllers\Admin\CollectionsControllers::class, "execute_dbm_import_task"])->name("admin.collections.dbms.pons.import.execute");
 
             // Route::delete("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");
+
+
+            // Collections Graphs
+            Route::post("collections-dbms-get-olts-and-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "get_olts_and_pons"])->name("admin.collections.dbms.get.olts.and.pons");
+
         });
 
     });

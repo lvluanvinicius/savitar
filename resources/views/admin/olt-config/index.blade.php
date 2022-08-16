@@ -20,7 +20,7 @@
 
             <div class="col-md-3">
                 <div class="btn-actions-table-group">
-                    <x-btn-actions-tables classIcon="fa fa-upload" name="Novo exports "  nameModal="#modal-new-olt" nameId/>
+                    <x-btn-actions-tables classIcon="fa fa-upload" name="Nova OLT "  nameModal="#modal-new-olt" nameId/>
                 </div>
             </div>
 
