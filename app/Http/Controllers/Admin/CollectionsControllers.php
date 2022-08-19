@@ -9,10 +9,8 @@ use App\Models\ImportDBTask;
 use App\Models\OltConfig;
 use App\Traits\AppResponse;
 use App\Traits\LoadMessages;
-use Error;
 use Exception;
 use Illuminate\Http\Request;
-use PDOException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -21,16 +19,31 @@ class CollectionsControllers extends Controller
 {
     use AppResponse, LoadMessages;
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $olts = OltConfig::get();
+        // dd($request->start_filter);
+        /**
+         * Verificando se ID foi informado para busca de dados em relação ao equipamento selecionado.
+         * Os dados vem de acordo com o equipamento selecionado em OLT Config.
+         */
+        if (!$request->id)
+        {
+            return redirect()->route("admin.collections.olt.config")->with([
+                'status' => 'Error',
+			    'message' => $this->getMessage("apperror", "ErrorEquipmentSelectedForGraphs")
+            ]);
+        }
 
         return view("admin.collections-dashboard.index")->with([
             "title" => "DBM Dashboard | " . env("APP_NAME"),
-            "olts" => $olts
         ]);
     }
 
+    /**
+     * Retornando a página de equipamentos e equipamentos.
+     *
+     * @return void
+     */
     public function list_olt_config()
     {
         $olts = OltConfig::get();
@@ -43,13 +56,7 @@ class CollectionsControllers extends Controller
 
     public function get_olts_and_pons(Request $request)
     {
-        $olts = OltConfig::whereIn("id", $request->olts)->get();
-        $dbms = AverageDBM::whereIn("ID_OLT", $request->olts)->get();
-
-        $graphPons = new GponsCharts;
-
-
-        return $dbms;
+        //
     }
 
     public function create_olt_config(Request $request)
@@ -99,6 +106,11 @@ class CollectionsControllers extends Controller
             "dbm_collections" => $dbm,
             "imports_tasks" => $imports_tasks
         ]);
+    }
+
+    public function delete_dbm_import_task(Request $request)
+    {
+        //
     }
 
 
@@ -166,11 +178,6 @@ class CollectionsControllers extends Controller
         }
     }
 
-    public function delete_dbm_import_task(Request $request)
-    {
-        //
-    }
-
 
     public function get_dbm_pons()
     {
@@ -178,3 +185,4 @@ class CollectionsControllers extends Controller
     }
 
 }
+

@@ -61,13 +61,13 @@ class MenuServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 "text" => "dbm-reports",
-                "icon" => "fas fa-fw fa-phone",
+                "icon" => "fas fa-fw fa-chart-line",
                 "submenu" => [
-                    [
-                        "text" => "collections-dbm-dashboard",
-                        "route" => 'admin.collections.dbms.dashboard',
-                        "icon" => "fas fa-fw fa-chart-bar"
-                    ],
+                    // [
+                    //     "text" => "collections-dbm-dashboard",
+                    //     "route" => 'admin.collections.dbms.dashboard',
+                    //     "icon" => "fas fa-fw fa-chart-bar"
+                    // ],
                     [
                         "text" => "collections-olt-show",
                         "route" => 'admin.collections.olt.config',

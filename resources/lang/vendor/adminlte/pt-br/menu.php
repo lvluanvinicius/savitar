@@ -25,7 +25,7 @@ return [
     "reports"                       => "Relatórios",
     "graphics-reports"              => "Gráficos",
     "dbm-reports"                   => "Relatórios de DBM",
-    "collections-dbm-dashboard"     => "Relatório",
+    "collections-dbm-dashboard"     => "Dashboard",
     "collections-olt-show"          => "Lista de Olts",
     "collections-dbm-show"          => "Coletas de Pons",
 ];

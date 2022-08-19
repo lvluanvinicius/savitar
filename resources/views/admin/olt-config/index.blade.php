@@ -109,9 +109,13 @@
                                 <td>{{ convetDateUpdated($olt->updated_at) }}</td>
                                 <td>
                                     <div class="actions-buttons-group">
-                                        <div>
+                                        <div class="mr-1">
                                             <x-actions troute="admin.collections.olt.config.update"
-                                            ticonAndClass="fa fa-edit text-info" iduser="{{ $olt->id }}" />
+                                            ticonAndClass="fa fa-edit fa-1x text-info" iduser="{{ $olt->id }}" />
+                                        </div>
+                                        <div>
+                                            <x-actions troute="admin.collections.dbms.dashboard"
+                                            ticonAndClass="fa fa-chart-line fa-1x text-success" iduser="{{ $olt->id }}" />
                                         </div>
                                         {{--  <div>
                                             <x-actions troute="admin." ticonAndClass="fa fa-trash text-danger"

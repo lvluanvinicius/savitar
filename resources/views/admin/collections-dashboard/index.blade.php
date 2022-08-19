@@ -5,8 +5,6 @@
     <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
 @stop
 
@@ -14,35 +12,49 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="row">
+            <form action="" method="get">
+                <div class="row">
+                    <input type="hidden" name="id" value="{{ $_GET['id'] }}">
 
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <select class="js-states form-control selectpicker" id="id_olts_select" multiple>
-                            @foreach ($olts as $olt)
-                                 <option value="{{ $olt->id }}">
-                                    {{ $olt->OLT_NAME }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="col-md-9 row">
+                        <div class="form-group col-4">
+                            <input type="date" class="form-control" name="start_filter"pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required/>
+                        </div>
+                        <div class="form-group col-4">
+                            <input type="date" class="form-control" name="end_filter" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <button class="btn btn-outline-secondary float-right w-100" id="load_reports">Gerar Gráficos</button>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-secondary float-right w-100">Buscar por data</button>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
+            </form>
 
         </div>
     </div>
 @endsection
 
 @section('content')
+@php
+    $startDate="";
+    $endDate="";
+    $charts = new App\Charts\GponsCharts;
+    (!isset($_GET["start_filter"])) ? $startDate = date('Y-m-d') . " 00:00:00" : $startDate=$_GET['start_filter'] . " 00:00:00";
+    (!isset($_GET["end_filter"])) ? $endDate = date('Y-m-d') . " 23:59:59" : $endDate=$_GET['end_filter'] . " 23:59:59";
 
-Teste aqui
+    foreach (getGponsConfig($idOlt=$_GET["id"]) as $pons) {
+        $datas = getAveragesDBMOnGpon($idOlt=$_GET["id"], $gpon=$pons->PORT, $dateStart=$startDate, $dateEnd=$endDate);
+        $charts->labels(["Media de DBM", "Data"]);
+        $charts->dataset("Teste", "Line", [$datas["DBM_AVERAGE"], $datas["DATE"]]);
+    }
+
+@endphp
+
+{!! $charts->script() !!}
 
 @endsection
 
@@ -54,9 +66,7 @@ Teste aqui
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
     {{-- Feedback ao usuário sobre a ação executada.  --}}
     @if (session('message') && session('status') )
@@ -75,31 +85,4 @@ Teste aqui
     </script>
     @endif
 
-    <script>
-        $("#id_olts_select").select2({
-            theme: "classic",
-        });
-
-        $("#load_reports").on("click", function () {
-
-            $.ajax({
-                method: "POST",
-                url: "{{ route('admin.collections.dbms.get.olts.and.pons') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    olts: $("#id_olts_select").val()
-                },
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (response) {
-                    console.log(response);
-
-                }
-            });
-        });
-
-    </script>
 @endsection

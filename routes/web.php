@@ -113,7 +113,9 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
 
         // CollectionsControllers
         Route::middleware("collections")->group(function () {
+            // Dashboard
             Route::get("collections-dbms-dashboard", [App\Http\Controllers\Admin\CollectionsControllers::class, "dashboard"])->name("admin.collections.dbms.dashboard");
+
             Route::get("collections-olt-config", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_olt_config"])->name("admin.collections.olt.config");
             Route::get("collections-olt-config-update", [App\Http\Controllers\Admin\CollectionsControllers::class, "update_olt_config"])->name("admin.collections.olt.config.update");
             Route::get("collections-dbms-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "list_dbm_collections"])->name("admin.collections.dbms.pons");

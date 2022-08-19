@@ -83,5 +83,6 @@ Trait AppMessages {
         "ErrorFileNotInformed" => "Arquivo não informado.",
         "ErrorTaskAlreadyPerformed" => "Tarefa já foi executada, por favor, atualize a página.",
         "ErrorEquipmentAlreadyExists" => "Equipamento Já cadastrado. Consulte o que existe e tente novamente com um nome diferente.",
+        "ErrorEquipmentSelectedForGraphs" => "Identificador de equipamento não informado, por favor, selecione um equipamento no icone de gráfico.",
     ];
 }
