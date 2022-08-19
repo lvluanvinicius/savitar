@@ -48,13 +48,17 @@
 
     foreach (getGponsConfig($idOlt=$_GET["id"]) as $pons) {
         $datas = getAveragesDBMOnGpon($idOlt=$_GET["id"], $gpon=$pons->PORT, $dateStart=$startDate, $dateEnd=$endDate);
-        $charts->labels(["Media de DBM", "Data"]);
-        $charts->dataset("Teste", "Line", [$datas["DBM_AVERAGE"], $datas["DATE"]]);
+        //$charts->labels(["Media de DBM", "Data", "Testado"]);
+        $charts->dataset("$pons->PORT", "line", [$datas[1]]);
     }
+
+    //$datas = getAveragesDBMOnGpon($idOlt=$_GET["id"], $gpon="gpon 1/1/2", $dateStart=$startDate, $dateEnd=$endDate);
+    //$charts->labels(["Media de DBM", "Data"]);
+    //$charts->dataset("Teste", "line", [$datas[1], $datas[0]]);
 
 @endphp
 
-{!! $charts->script() !!}
+{!! $charts->container() !!}
 
 @endsection
 
@@ -67,6 +71,8 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    {!! $charts->script(); !!}
+
 
     {{-- Feedback ao usuário sobre a ação executada.  --}}
     @if (session('message') && session('status') )
@@ -84,5 +90,7 @@
         }
     </script>
     @endif
+
+container
 
 @endsection
