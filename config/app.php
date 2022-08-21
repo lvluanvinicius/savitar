@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
 
         /*
         * Application Service Providers...
@@ -194,6 +195,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'Lava' => 'Khill\Lavacharts\Laravel\LavachartsFacade',
     ])->toArray(),
 
 ];
