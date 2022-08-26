@@ -20,3 +20,73 @@ Permissões:
 create database api_zabbix character set utf8mb4 collate utf8mb4_unicode_ci;
 create user 'apizabbix'@'%' identified by 'password';
 grant all privileges on api_zabbix.* to "apizabbix"@"%";
+
+
+
+
+
+
+
+
+
+
+
+
+@php
+    $startDate="";
+    $endDate="";
+    $idEq=$_GET["id"];
+
+    (!isset($_GET["start_filter"])) ? $startDate = date('Y-m-d') . " 00:00:00" : $startDate=$_GET['start_filter'] . " 00:00:00";
+    (!isset($_GET["end_filter"])) ? $endDate = date('Y-m-d') . " 23:59:59" : $endDate=$_GET['end_filter'] . " 23:59:59";
+
+
+    /*foreach (getGponsConfig($idOlt=$idEq) as $pons) {
+        $separator=str_replace("/", "-", str_replace(" ", "-", $pons->PORT));
+        echo "<canvas id='chart-" . $separator . "' width='400' height='400'></canvas>";
+
+        $datas = getAveragesDBMOnGpon(
+            $idOlt=$_GET["id"],
+            $gpon=$pons->PORT,
+            $dateStart=$startDate,
+            $dateEnd=$endDate);
+
+    }*/
+
+@endphp
+
+@foreach (getGponsConfig($idOlt=$idEq) as $pons)
+    @php
+        $separator=str_replace("/", "", str_replace(" ", "", $pons->PORT));
+        $datas = getAveragesDBMOnGpon(
+            $idOlt=$idEq,
+            $gpon=$pons->PORT,
+            $dateStart=$startDate,
+            $dateEnd=$endDate);
+
+            $dt = json_encode($datas[0]);
+            $dbm = json_encode($datas[1]);
+    @endphp
+
+    <canvas id='chart-{{ $separator }}' width='400' height='400'></canvas>
+
+    <script>
+        // &quot
+        const dbm{{ $separator }} = '{{ $dbm }}';
+        const date{{ $separator }} = '{{ $dt }}';
+
+        const ctx{{ $separator }} = document.getElementById("chart-{{ $separator }}").getContext('2d');
+        const chart{{ $separator }} = new Chart(ctx{{ $separator }}, {
+            type: "line",
+            data: {
+                labels: date{{ $separator }},
+                datasets: [{
+                    label: '# of DBM',
+                    data: dbm{{ $separator }},
+                    borderWidth: 1
+                }],
+            }
+        });
+    </script>
+
+@endforeach

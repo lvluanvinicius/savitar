@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 @stop
 
@@ -41,83 +40,29 @@
 @endsection
 
 @section('content')
-@php
-    $startDate="";
-    $endDate="";
-    $idEq=$_GET["id"];
-
-    (!isset($_GET["start_filter"])) ? $startDate = date('Y-m-d') . " 00:00:00" : $startDate=$_GET['start_filter'] . " 00:00:00";
-    (!isset($_GET["end_filter"])) ? $endDate = date('Y-m-d') . " 23:59:59" : $endDate=$_GET['end_filter'] . " 23:59:59";
-
-
-    /*foreach (getGponsConfig($idOlt=$idEq) as $pons) {
-        $separator=str_replace("/", "-", str_replace(" ", "-", $pons->PORT));
-        echo "<canvas id='chart-" . $separator . "' width='400' height='400'></canvas>";
-
-        $datas = getAveragesDBMOnGpon(
-            $idOlt=$_GET["id"],
-            $gpon=$pons->PORT,
-            $dateStart=$startDate,
-            $dateEnd=$endDate);
-
-    }*/
-
-@endphp
-
-@foreach (getGponsConfig($idOlt=$idEq) as $pons)
     @php
-        $separator=str_replace("/", "", str_replace(" ", "", $pons->PORT));
-        $datas = getAveragesDBMOnGpon(
-            $idOlt=$idEq,
-            $gpon=$pons->PORT,
-            $dateStart=$startDate,
-            $dateEnd=$endDate);
+        $startDate="";
+        $endDate="";
+        $idEq=$_GET["id"];
 
-            $dt = json_encode($datas[0]);
-            $dbm = json_encode($datas[1]);
+        (!isset($_GET["start_filter"])) ? $startDate = date('Y-m-d') . " 00:00:00" : $startDate=$_GET['start_filter'] . " 00:00:00";
+        (!isset($_GET["end_filter"])) ? $endDate = date('Y-m-d') . " 23:59:59" : $endDate=$_GET['end_filter'] . " 23:59:59";
+
+
+        /*foreach (getGponsConfig($idOlt=$idEq) as $pons) {
+            $separator=str_replace("/", "-", str_replace(" ", "-", $pons->PORT));
+            echo "<canvas id='chart-" . $separator . "' width='400' height='400'></canvas>";
+
+            $datas = getAveragesDBMOnGpon(
+                $idOlt=$_GET["id"],
+                $gpon=$pons->PORT,
+                $dateStart=$startDate,
+                $dateEnd=$endDate);
+
+        }*/
+
     @endphp
 
-    <canvas id='chart-{{ $separator }}' width='400' height='400'></canvas>
-
-    <script>
-        // &quot
-        const dbm{{ $separator }} = '{{ $dbm }}';
-        const date{{ $separator }} = '{{ $dt }}';
-        const test{{ $separator }} = JSON.stringify(date{{ $separator }})
-        console.log(test{{ $separator }}.replace("&quot", '"'));
-
-        const ctx{{ $separator }} = document.getElementById("chart-{{ $separator }}").getContext('2d');
-        const chart{{ $separator }} = new Chart(ctx{{ $separator }}, {
-            type: "line",
-            data: {
-                labels: date{{ $separator }},
-                datasets: [{
-                    label: '# of DBM',
-                    data: dbm{{ $separator }},
-
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }],
-            }
-        });
-    </script>
-
-@endforeach
 
 @endsection
 
@@ -129,7 +74,6 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
 
     {{-- Feedback ao usuário sobre a ação executada.  --}}

@@ -29,7 +29,7 @@ if (!function_exists("getAveragesDBMOnGpon")) {
         //array_push($values, $dbmArray);
         // $values['DBM_AVERAGE'] = $dbmArray;
         // $values['DATE'] = $dateArray;
-        return array($dateArray, $dbmArray);
+        return array($dbmArray, $dateArray);
         // return $values;
     }
 }
