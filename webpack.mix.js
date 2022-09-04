@@ -15,5 +15,6 @@ const mix = require('laravel-mix');
  postCss("resources/views/admin/assets/css/admin.custom.css", "public/assets/admin/css")
 
  .copyDirectory("resources/views/admin/assets/img", "public/assets/admin/img")
+ .copy("resources/views/admin/assets/img/savitar.ico", "public/favicons/favicon.ico")
 
 . js("resources/views/admin/assets/js/admin.custom.js", "public/assets/admin/js");

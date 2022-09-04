@@ -1,5 +1,13 @@
 @extends('adminlte::page')
 @section('title', $title)
+
+@section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
+@stop
+
+
 @section('content_header')
     <div class="row">
         <div class="col-md-12">
@@ -134,12 +142,6 @@
       <!-- /.modal -->
 @stop
 
-@section('css')
-    <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
-@stop
 
 @section('content')
     <div class="row">

@@ -3,7 +3,6 @@
 
 @section("css")
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <link rel="icon" href="{{ asset('assets/admin/img/api.png') }}"/>
     <link rel="stylesheet" href={{ asset('assets/admin/css/admin.custom.css') }}>
 
     <style>
