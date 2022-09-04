@@ -93,11 +93,11 @@ class CollectionsControllers extends Controller
     public function list_dbm_collections()
     {
 
-        $dbm = AverageDBM::where('DBM_AVERAGE', "<=", -27)
-                ->join('olt_config', function ($join) {
+        $dbm = AverageDBM::
+                join('olt_config', function ($join) {
                     //
                     $join->on('pons_average_dbm.ID_OLT', "=", "olt_config.id");
-                })->get();
+                })->take(100)->get();
 
         $imports_tasks = ImportDBTask::where("finished", "=", 0)->get();
 
@@ -165,11 +165,14 @@ class CollectionsControllers extends Controller
                 throw new ProcessFailedException($process);
             }
 
+            if (str_contains($process->getOutput(), "Error: E01001") )
+            {
+                return $this->getMessage("apperror", "ErrorFileNotExistsCSVTask");
+            }
+
             ImportDBTask::where('id', "=", $request->idITask)->update([
                 "finished" => 1
             ]);
-
-            // return $process->getOutput();
 
             return $this->getMessage("appsuccess", "SuccessExecuteTask");
         } catch (Exception $err) {

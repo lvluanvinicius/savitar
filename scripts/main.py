@@ -3,18 +3,29 @@ sys.path.insert(0, ".")
 
 
 # import libs
+from os.path import exists
 import pandas as pd
 import numpy as np
 
 from sql.oltConfig import OltConfig
 from sql.ponsAnverage import PonsAverage
 
+# Carregando nome do arquivo.
+file_read=f"/var/www/html/storage/app/{sys.argv[1]}"
+
+# Checando se existe o arquivo.
+if not exists(file_read):
+    print("Error: E01001 - Falha ao tentar localizar o arquivo CSV.")
+    exit(0)
+
 
 # Carregamento do dataset.
 datacom = pd.DataFrame(
-    pd.read_csv(f"/var/www/html/storage/app/{sys.argv[1]}", low_memory=False),
+    pd.read_csv(file_read, low_memory=False),
     columns=["Device ID", "Port", "Serial Number", "Rx Power (dBm)"]
 )
+
+print(datacom.head())
 
 
 # Buscando pelas OLTs
@@ -43,8 +54,11 @@ for olts in olts_config:
         if "nan" in str(average):
             average=float(0)
 
+        # try:
         md_ponsAverage.save({
             "ID_OLT": olts["id"],
             "PON": f"gpon 1/1/{ponid}",
             "DBM_AVERAGE": average,
         })
+        # except Exception as err:
+        #     print(err);

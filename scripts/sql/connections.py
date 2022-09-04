@@ -9,9 +9,9 @@ class MysqlConnection(object):
     def __init__(self):
         self.USERNAME = "root"
         self.PASSWORD = "965700"
-        self.PORT = "33061"
-        self.HOST = "10.254.192.212"
-        self.DATABASE = "api_report"
+        self.PORT = "3306"
+        self.HOST = "192.168.0.52"
+        self.DATABASE = "api_server"
 
     def __str__(self):
         return f"Config Mysql: [Host {self.host} and port {self.port}]"

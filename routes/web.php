@@ -133,7 +133,7 @@ Route::middleware(['auth'])->prefix("app")->group(function () {
 
 
             // Collections Graphs
-            Route::post("collections-dbms-get-olts-and-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "get_olts_and_pons"])->name("admin.collections.dbms.get.olts.and.pons");
+            Route::get("collections-dbms-get-olts-and-pons", [App\Http\Controllers\Admin\CollectionsControllers::class, "get_olts_and_pons"])->name("admin.collections.dbms.get.olts.and.pons");
 
         });
 

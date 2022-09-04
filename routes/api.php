@@ -32,4 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
     //     Route::post("opg-get-alerts", [\App\Http\Controllers\Api\OPGController::class, "getAlertsBkp"])->name("api.get-alarms");
     //     //
     // });
+
+
+    Route::middleware("apidatacom")->group(function () {
+        Route::get("collections-get-data-pons", [\App\Http\Controllers\Api\CollectionsController::class, "get_collections"])->name("api.collections-get-data-pons");
+    });
 });
