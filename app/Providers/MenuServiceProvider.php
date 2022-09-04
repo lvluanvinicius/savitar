@@ -63,11 +63,6 @@ class MenuServiceProvider extends ServiceProvider
                 "text" => "dbm-reports",
                 "icon" => "fas fa-fw fa-chart-line",
                 "submenu" => [
-                    // [
-                    //     "text" => "collections-dbm-dashboard",
-                    //     "route" => 'admin.collections.dbms.dashboard',
-                    //     "icon" => "fas fa-fw fa-chart-bar"
-                    // ],
                     [
                         "text" => "collections-olt-show",
                         "route" => 'admin.collections.olt.config',
@@ -126,6 +121,13 @@ class MenuServiceProvider extends ServiceProvider
                 'route'  => 'app.profile',
                 'icon' => 'fas fa-fw fa-user',
             ]);
+
+            // Configurar sair depois
+            // $event->menu->add([
+            //     'text' => 'exit_account',
+            //     'route'  => 'app.logout',
+            //     'icon' => 'fas fa-fw fa-power-off',
+            // ]);
         });
     }
 }

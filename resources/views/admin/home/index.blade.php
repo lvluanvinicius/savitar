@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('title', $title)
+@section('plugins.chartJs', true)
 
 @section('css')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

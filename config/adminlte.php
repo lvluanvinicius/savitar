@@ -35,7 +35,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logo
+    | Google Fonts
+    |--------------------------------------------------------------------------
+    |
+    | Here you can allow or not the use of external google fonts. Disabling the
+    | google fonts may be useful if your admin panel internet access is
+    | restricted somehow.
+    |
+    | For detailed instructions you can look the google fonts section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'google_fonts' => [
+        'allowed' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Logo
     |--------------------------------------------------------------------------
     |
     | Here you can change the logo of your admin panel.
@@ -45,13 +63,59 @@ return [
     |
     */
 
-    // 'logo' => '<b>Zabbix</b> API',
     'logo' => env('APP_NAME'),
-    'logo_img' => "assets/admin/img/savitar02.png",
+    'logo_img' => 'assets/admin/img/savitar02.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => env('APP_NAME'),
+    'logo_img_alt' => 'Admin Logo',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Logo
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup an alternative logo to use on your login and register
+    | screens. When disabled, the admin panel logo will be used instead.
+    |
+    | For detailed instructions you can look the auth logo section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'auth_logo' => [
+        'enabled' => false,
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'Auth Logo',
+            'class' => '',
+            'width' => 50,
+            'height' => 50,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Preloader Animation
+    |--------------------------------------------------------------------------
+    |
+    | Here you can change the preloader animation configuration.
+    |
+    | For detailed instructions you can look the preloader section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'preloader' => [
+        'enabled' => true,
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'AdminLTE Preloader Image',
+            'effect' => 'animation__shake',
+            'width' => 60,
+            'height' => 60,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +129,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => false,
+    'usermenu_enabled' => true,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -86,10 +150,10 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => true,
+    'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
-    'layout_dark_mode' => false,
+    'layout_dark_mode' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -125,10 +189,10 @@ return [
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => 'custom-layout',
+    'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-info elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -147,7 +211,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => true,
+    'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -172,7 +236,7 @@ return [
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
-    'right_sidebar_push' => false,
+    'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
@@ -188,14 +252,14 @@ return [
     |
     */
 
-    'use_route_url' => true,
-    'dashboard_url' => 'app.home',
-    'logout_url' =>  "app.logout", // 'logout',
-    'login_url' => "login.auth",
-    'register_url' => false,
-    'password_reset_url' => false,
-    'password_email_url' => false,
-    'profile_url' => "app.profile",
+    'use_route_url' => false,
+    'dashboard_url' => 'home',
+    'logout_url' => 'app.logout',
+    'login_url' => 'login',
+    'register_url' => 'register',
+    'password_reset_url' => 'password/reset',
+    'password_email_url' => 'password/email',
+    'profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -227,11 +291,11 @@ return [
 
     'menu' => [
         // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
+        [
+            'type'         => 'navbar-search',
+            'text'         => 'search',
+            'topnav_right' => false,
+        ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -243,11 +307,6 @@ return [
             'text' => 'search',
         ],
 
-        [
-            'text' => 'home',
-            'route'  => 'app.home',
-            'icon' => 'fas fa-fw fa-home',
-        ],
 
 
     ],
