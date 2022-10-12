@@ -1,0 +1,32 @@
+
+Códigos de erro:
+    :E00160 -> "Falha na comunicação com o host de destino";
+    :E00161 -> "Erro de credenciais";
+    :E00171 -> "Erro de saída STDERR";
+    :E00172 -> "Apresentado, quando a saída do comando, retorna erro de sintax";
+    :E00173 -> "Nenhuma entrada encontrada"
+
+    # Erros de Collections main.py and other.
+    :E01001 -> "Falha ao tentar localizar o arquivo CSV ou ele não existe."
+    :E01002 -> "Quando nenhum parâmtro está sendo informado ao script."
+
+
+Permissões:
+    :dash -> "Permissão de acesso ao Dashboard e Ações";
+    :ulist -> "Permissão de acesso aos usuários e Ações";
+    :ugroup -> "Permissão de acesso ao Grupo de Usuários e Ações";
+    :keyaccess -> "Permissão de acesso a Chaves de Acesso e Ações.";
+
+
+    ["dash", "ulist", "ugroup", "keyaccess", "create", "update", "read", "write", "delete"]
+
+
+create database api_server character set utf8mb4 collate utf8mb4_unicode_ci;
+create user 'apiserver'@'%' identified by 'password';
+grant all privileges on api_server.* to "apiserver"@"%";
+
+
+
+
+
+
