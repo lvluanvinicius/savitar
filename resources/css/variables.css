@@ -1,0 +1,23 @@
+:root {
+    --background-primary:#5600e0;
+    --background-primary-01:#6200ff;
+    --background-secondary: #6c757d;
+    --background-success: #00ff88;
+    --background-success-01: #3cff00;
+    --background-danger: #dc3545;
+    --background-warning: #ffc107;
+    --background-info: #0dcaf0;
+    --background-light: #f8f9fa;
+    --background-light-01: #D9D9D9;
+    --background-dark: #212529;
+
+    --text-primary:#6200ff;
+    --text-secondary: #6c757d;
+    --text-success: #00ff88;
+    --text-danger: #dc3545;
+    --text-warning: #ffc107;
+    --text-info: #0dcaf0;
+    --text-light: #f8f9fa;
+    --text-light-01: #D9D9D9;
+    --text-dark: #212529;
+}
