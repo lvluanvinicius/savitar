@@ -10,6 +10,7 @@ class HomeController extends Controller
     public function index() {
         return view('admin.home.index')->with([
             "title" => "Home | " . env('APP_NAME'),
+            "subtitle" => "Painel",
         ]);
     }
 }

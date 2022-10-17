@@ -51,6 +51,7 @@ body {
 #root-sidebar-content .menu-content {
     height: 100%;
     overflow-y: auto;
+    margin-top: 1.5rem;
 }
 #root-sidebar-content .menu-content::-webkit-scrollbar {
     width: 0px;
@@ -72,6 +73,11 @@ body {
 #root-sidebar-content .menu-content ul .menu-item {
     font-size: 1rem;
     padding: 1rem 1.5rem;
+    transition: 1s; 
+}
+
+#root-sidebar-content .menu-content ul .menu-item i {
+    margin-right: .2rem;
 }
 
 #root-sidebar-content .menu-content ul .menu-item:hover {
@@ -82,7 +88,6 @@ body {
 
 #root-sidebar-content .menu-content .side-dropdown-container {
     background-color: var(--background-primary);
-    transition: 1s;
     display: none;
 }
 
@@ -101,7 +106,8 @@ body {
     align-items: center;
     padding-left: .5rem;
     font-size: .9rem;
-    padding: 1rem 2rem;    
+    padding: 1rem 2rem;
+    transition: 1s; 
 }
 
 #root-sidebar-content .menu-content .side-dropdown-container .submenu-item:hover{
@@ -214,3 +220,29 @@ body {
     padding: .5rem;
     z-index: 0;
 }
+
+/* Page Header */
+#root-page-header {
+    background-color: var(--background-light);
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 1.5rem;
+}
+
+#root-page-header h1 {
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: .1rem;
+}
+
+/* /End Page Header */
+
+
+/* Page Content -> Content */
+.page-content-for-contents {
+    background-color: var(--background-light);
+    margin-top: 1rem;
+    padding: 1rem;
+}
+/* End Page Content -> Content */

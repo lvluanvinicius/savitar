@@ -22,14 +22,14 @@
                 <span>Administração</span>
             </div>
 
-            <a href="#" class="menu-ancor-link">
+            <a class="menu-ancor-link">
                 <li class="menu-item" id="handle-users-dropdown">
                     <i class="fa-solid fa-users"></i>
                     Usuários
                 </li>
             </a>
             <ul class="side-dropdown-container" handle="handle-users-dropdown">
-                <a href="#">
+                <a href="{{ route('admin.users.list') }}">
                     <li class="submenu-item">Todos os Usuários</li>
                 </a>   
                 
@@ -41,7 +41,7 @@
                 </a>
             </ul>
 
-            <a href="#" class="menu-ancor-link">
+            <a class="menu-ancor-link">
                 <li class="menu-item" id="handle-groups-dropdown">
                     <i class="fa-solid fa-user-group"></i>
                     Grupos
@@ -61,7 +61,7 @@
                 </a>
             </ul>
 
-            <a href="#" class="menu-ancor-link">
+            <a class="menu-ancor-link">
                 <li class="menu-item" id="handle-keys-dropdown">
                     <i class="fa-sharp fa-solid fa-key"></i>
                     Api
@@ -85,11 +85,17 @@
             </div>
 
             <a href="#" class="menu-ancor-link">
-                <li class="menu-item">Perfil</li>
+                <li class="menu-item">
+                    <i class="fa-solid fa-user"></i>
+                    Perfil
+                </li>
             </a>
 
-            <a href="#" class="menu-ancor-link">
-                <li class="menu-item">Sair</li>
+            <a href="{{ route('admin.logout') }}" class="menu-ancor-link">
+                <li class="menu-item">
+                    <i class="fa-solid fa-door-open"></i>
+                    Sair
+                </li>
             </a>
 
         </ul>

@@ -1,7 +1,11 @@
 @extends('admin.master')
 
 @section('content')
-Home Page
+<x-page-header title="{{ $subtitle }}"/>
+
+<div style="background-color: white; margin-top: 1rem">
+    testes
+</div>
 @endsection
 
 @section('js')

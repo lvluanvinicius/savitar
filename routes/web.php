@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
-
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +24,7 @@ Route::middleware("auth")->prefix("admin")->as("admin.")->group(function () {
     Route::get("/home", [HomeController::class, 'index'])->name("home.page");
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    Route::prefix('users')->as("users.")->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name("list");
+    });
 });
