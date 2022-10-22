@@ -5,32 +5,31 @@
 @endsection
 
 @section('content')
-<x-page-header title="{{ $subtitle }}" />
+<x-page-header title="{{ $subtitle }}"/>
 
-<div class="page-content-for-contents">
-    <table id="users-table" class="display responsive nowrap">
+<div id="content-users-groups">
+    <table id="group-users-table" class="display responsive nowrap">
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>E-mail</th>
-                <th>Usuário</th>
+                <th>Permissões</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($group_users as $gpuser)
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->username }}</td>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->id }}</td>
+                    <td>{{ $gpuser->name }}</td>
+                    <td>{{ $gpuser->permissions }}</td>
+                    <td>{{ $gpuser->id }}</td>
+                    <td>{{ $gpuser->id }}</td>
                 </tr>            
             @endforeach
         </tbody>
     </table>
 </div>
+
 @endsection
 
 @section('js')  

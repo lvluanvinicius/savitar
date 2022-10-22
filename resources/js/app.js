@@ -45,3 +45,19 @@ document.getElementById("handle-groups-dropdown").addEventListener('click', (eve
         }
     }
 });
+
+
+// ============================= Datatable Config;
+$(document).ready(function () {
+    $('#users-table').DataTable({
+        responsive: true,        
+    });
+});
+
+$(document).ready(function () {
+    $('#group-users-table').DataTable({
+        responsive: true,        
+    });
+});
+
+// ============================= /End Datatable Config;

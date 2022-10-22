@@ -33,7 +33,7 @@
                     <li class="submenu-item">Todos os Usuários</li>
                 </a>   
                 
-                <a href="#">
+                <a href="{{ route('admin.users.create') }}">
                     <li class="submenu-item">
                         <i class="fa-solid fa-plus"></i>
                         Criar
@@ -49,7 +49,7 @@
             </a>
 
             <ul class="side-dropdown-container" handle="handle-groups-dropdown">
-                <a href="#">
+                <a href="{{ route('admin.users-groups.list') }}">
                     <li class="submenu-item">Todos os Grupos</li>
                 </a>   
                 

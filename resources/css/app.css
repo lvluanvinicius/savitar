@@ -1,5 +1,13 @@
 @import url('./variables.css');
 
+@keyframes image-profile-border {
+    from {
+        border: 3px solid var(--background-primary);
+    } to {
+        border: 3px solid var(--background-secondary);
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -198,7 +206,8 @@ body {
 
 #header-content div#menu-dashboard a.menu-profile-box li span.img-profile img {
     border-radius: 50%;
-    border: 3px solid var(--background-primary);
+    /* border: 3px solid var(--background-primary); */
+    animation: image-profile-border 5s infinite both alternate-reverse;
     width: 2.3rem;
     height: 2.3rem;
 }
@@ -243,6 +252,72 @@ body {
 .page-content-for-contents {
     background-color: var(--background-light);
     margin-top: 1rem;
-    padding: 1rem;
+    padding: 1.3rem;
 }
 /* End Page Content -> Content */
+
+
+/* Page Content -> Content -> Users Create Form/Page */
+#create-user-content {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 40% 60%; 
+    grid-template-areas: "PHOTOAREA FORMAREA";
+}
+
+#create-user-content .form-content {
+    grid-area: FORMAREA;
+    background-color: var(--background-light);
+    padding: 2rem;
+}
+
+#create-user-content .row-form-users {
+    display: flex;
+}
+
+#create-user-content .row-form-users .group-input:nth-child(2n) {
+    margin-left: 1rem;
+}
+
+.group-input {
+    width: 100%;
+}
+
+.group-input label {   
+    display: inline-block;
+    width: 100%;
+    margin-bottom: .5rem
+}
+
+.group-input input {   
+    padding: 0 1rem;
+    font-size: 1rem;
+    width: 90%;
+    height: 1.8rem;
+    border-radius: .5rem;
+    margin-bottom: .5rem;
+    border: none;
+    background-color: var(--background-light-01);
+}
+
+
+.group-input input:focus {
+    outline: none;
+}
+
+#create-user-content .photo-area {
+    grid-area: PHOTOAREA;
+}
+
+/* End Page Content -> Content -> Users Create Form/Page */
+
+
+/* ============================== Page Group Users Config ============================== */
+
+#content-users-groups {
+    background-color: var(--background-light);
+    margin-top: 1rem;
+    padding: 1.3rem;
+}
+
+/* ============================== End Page Group Users Config ============================== */

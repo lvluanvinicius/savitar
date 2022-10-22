@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\GroupUsers;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class GroupUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = (new User())->all();
-        return view("admin.users.index")->with([
-            "title" => "Usuários | " . env('APP_NAME'),
-            "subtitle" => "Usuários",
-            "users" => $users,
+        $groups = GroupUsers::all();
+        return view('admin.groupusers.index')->with([
+            "title" => "Grupos de Usuários | " . env('APP_NAME'),
+            "subtitle" => "Grupos de Usuários",
+            "group_users" => $groups,
         ]);
     }
 
@@ -30,10 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.usercreate.index')->with([
-            "title" => "Novo Usuário | " . env('APP_NAME'),
-            "subtitle" => "Novo usuário",
-        ]);
+        //
     }
 
     /**
@@ -44,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
