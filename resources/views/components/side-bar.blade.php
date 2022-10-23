@@ -53,7 +53,7 @@
                     <li class="submenu-item">Todos os Grupos</li>
                 </a>   
                 
-                <a href="#">
+                <a href="{{ route('admin.users-groups.create') }}">
                     <li class="submenu-item">
                         <i class="fa-solid fa-plus"></i>
                         Criar

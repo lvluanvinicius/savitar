@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\GroupUsers;
 use App\Models\User;
+use App\Traits\AppResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use AppResponse;
     /**
      * Display a listing of the resource.
      *
@@ -30,9 +33,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        $perms = GroupUsers::all();
         return view('admin.usercreate.index')->with([
             "title" => "Novo Usuário | " . env('APP_NAME'),
             "subtitle" => "Novo usuário",
+            "groups" => $perms,
         ]);
     }
 
@@ -45,6 +50,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
+
+
+
+
+        // return $this->success($type = 0, "",  $code = 200);
+        // return redirect()->back()->withInput($request->all());
     }
 
     /**

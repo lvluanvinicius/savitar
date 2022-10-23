@@ -33,5 +33,7 @@ Route::middleware("auth")->prefix("admin")->as("admin.")->group(function () {
 
     Route::prefix('users-groups')->as('users-groups.')->group(function () {
         Route::get('/', [GroupUsersController::class, 'index'])->name('list');
+        Route::get('/create', [GroupUsersController::class, 'create'])->name('create');
+        Route::post('/store', [GroupUsersController::class, 'store'])->name('store');
     });
 });

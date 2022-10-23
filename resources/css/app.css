@@ -3,7 +3,9 @@
 @keyframes image-profile-border {
     from {
         border: 3px solid var(--background-primary);
-    } to {
+    }
+
+    to {
         border: 3px solid var(--background-secondary);
     }
 }
@@ -28,7 +30,7 @@ body {
 /* ------------------------------ Sidebar Config -------------------------------------- */
 
 #root-sidebar-content {
-    grid-area: SIDEBAR;    
+    grid-area: SIDEBAR;
     height: 100%;
     width: 15%;
     top: 0;
@@ -61,6 +63,7 @@ body {
     overflow-y: auto;
     margin-top: 1.5rem;
 }
+
 #root-sidebar-content .menu-content::-webkit-scrollbar {
     width: 0px;
 }
@@ -81,7 +84,7 @@ body {
 #root-sidebar-content .menu-content ul .menu-item {
     font-size: 1rem;
     padding: 1rem 1.5rem;
-    transition: 1s; 
+    transition: 1s;
 }
 
 #root-sidebar-content .menu-content ul .menu-item i {
@@ -115,10 +118,10 @@ body {
     padding-left: .5rem;
     font-size: .9rem;
     padding: 1rem 2rem;
-    transition: 1s; 
+    transition: 1s;
 }
 
-#root-sidebar-content .menu-content .side-dropdown-container .submenu-item:hover{
+#root-sidebar-content .menu-content .side-dropdown-container .submenu-item:hover {
     transform: scale(1.05);
     /* background-color: var(--background-primary-01); */
 }
@@ -134,7 +137,7 @@ body {
     grid-area: CONTENT;
     display: grid;
     grid-template-rows: 3rem;
-    grid-template-areas: "HEADER" "CONTENTPAGE";    
+    grid-template-areas: "HEADER" "CONTENTPAGE";
 }
 
 
@@ -151,7 +154,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-areas: "LOGO MENU";
-    align-items: center;  
+    align-items: center;
 }
 
 #header-content .button-sidebar {
@@ -164,8 +167,7 @@ body {
     font-size: 1.4rem;
 }
 
-#header-content div#menu-dashboard {
-}
+#header-content div#menu-dashboard {}
 
 #header-content div#menu-dashboard ul {
     display: flex;
@@ -200,7 +202,7 @@ body {
 
 
 /* profile-status */
-#header-content div#menu-dashboard a.menu-profile-box li span.img-profile  {
+#header-content div#menu-dashboard a.menu-profile-box li span.img-profile {
     position: relative;
 }
 
@@ -214,7 +216,7 @@ body {
 
 #header-content div#menu-dashboard a.menu-profile-box li span.img-profile span.profile-status {
     position: absolute;
-    bottom: -2px; 
+    bottom: -2px;
     right: -3px;
     color: var(--background-success-01);
     font-size: 1.3rem;
@@ -254,6 +256,7 @@ body {
     margin-top: 1rem;
     padding: 1.3rem;
 }
+
 /* End Page Content -> Content */
 
 
@@ -261,8 +264,8 @@ body {
 #create-user-content {
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: 40% 60%; 
-    grid-template-areas: "PHOTOAREA FORMAREA";
+    grid-template-columns: 60% 40%;
+    grid-template-areas: "FORMAREA PHOTOAREA";
 }
 
 #create-user-content .form-content {
@@ -281,15 +284,38 @@ body {
 
 .group-input {
     width: 100%;
+    margin-bottom: 1rem;
 }
 
-.group-input label {   
+.group-input.btn-send button {
+    color: var(--background-light);
+    background-color: var(--background-primary);
+    width: 10rem;
+    outline: none;
+    border: none;
+    height: 2rem;
+    border-radius: .5rem;
+    float: right;
+    cursor: pointer;
+    /* box-shadow: 1px 1px 2px var(--background-primary-01); */
+}
+
+
+.group-input.btn-send button:hover {
+    background-color: var(--background-primary-01);
+    /* box-shadow: none; */
+    transform: scale(1.03);
+}
+
+
+.group-input label {
     display: inline-block;
     width: 100%;
     margin-bottom: .5rem
 }
 
-.group-input input {   
+.group-input input,
+.group-input select {
     padding: 0 1rem;
     font-size: 1rem;
     width: 90%;
@@ -298,6 +324,11 @@ body {
     margin-bottom: .5rem;
     border: none;
     background-color: var(--background-light-01);
+}
+
+.group-input select {
+    width: 100%;
+    cursor: pointer;
 }
 
 
@@ -309,15 +340,166 @@ body {
     grid-area: PHOTOAREA;
 }
 
+#create-user-content #photo-area {
+    margin-left: 1rem;
+    background-color: var(--background-light);
+}
+
+#create-user-content #photo-area .card-photo {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+}
+
+#create-user-content #photo-area .card-photo img {
+    border-radius: 50%;
+    width: 15rem;
+    height: 15rem;
+    animation: image-profile-border 5s infinite both alternate-reverse;
+    background-color: var(--background-light-01);
+}
+
+#create-user-content #photo-area .card-input-file {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#create-user-content #photo-area .card-input-file label {
+    background-color: var(--background-primary);
+    color: var(--background-light);
+    height: 2rem;
+    width: 45%;
+    letter-spacing: .05rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+#create-user-content #photo-area .card-input-file label:hover {
+    background-color: var(--background-primary-01);
+    transform: scale(1.03);
+}
+
+#create-user-content #photo-area .card-input-file input[type='file'] {
+    display: none;
+
+}
+
 /* End Page Content -> Content -> Users Create Form/Page */
 
 
 /* ============================== Page Group Users Config ============================== */
 
-#content-users-groups {
+#content-users-groups,
+#content-users-groups-create {
     background-color: var(--background-light);
     margin-top: 1rem;
     padding: 1.3rem;
+}
+
+#content-users-groups-create {}
+
+
+
+#content-users-groups-create .form-row-user {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#content-users-groups-create .form-group {
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+#content-users-groups-create .form-group label {
+    width: 100%;
+    display: flex;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+}
+
+#content-users-groups-create .form-group input {
+    font-size: 1rem;
+    width: 50%;
+    border-radius: .5rem;
+    border: none;
+    text-align: center;
+    padding: .4rem;
+    outline: none;
+    background-color: var(--background-light-01);
+}
+
+#content-users-groups-create .form-group button {
+    background-color: var(--background-primary);
+    color: var(--background-light);
+    width: 30%;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    /* box-shadow: 1px 1px 2px var(--background-primary-01); */
+}
+
+#content-users-groups-create .form-group button:hover {
+    box-shadow: none;
+    background-color: var(--background-primary-01);
+    transform: scale(1.03);
+}
+
+#content-users-groups-create .form-group.btn-send {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#content-users-groups-create .form-group-permissions {
+    text-align: center;
+}
+
+#content-users-groups-create .form-group-permissions span.title-permissions {
+    letter-spacing: .1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/*  */
+
+#content-users-groups-create .form-group-permissions #permis-pages,
+#content-users-groups-create .form-group-permissions #permis-actions {
+    width: 100%;
+}
+
+#content-users-groups-create .form-group-permissions .perm-box-input {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#content-users-groups-create .form-group-permissions #permis-actions span,
+#content-users-groups-create .form-group-permissions #permis-pages span {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+#content-users-groups-create .form-group-permissions #permis-actions hr,
+#content-users-groups-create .form-group-permissions #permis-pages hr {
+    border-color: rgba(0, 0, 0, .1);
+    margin: .4rem 25rem;
+}
+
+#content-users-groups-create .form-group-permissions .perm-box-input .perm-group-input {
+    margin: .5rem;
 }
 
 /* ============================== End Page Group Users Config ============================== */

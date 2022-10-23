@@ -4,7 +4,7 @@ import.meta.glob([
 ]);
 
 
-document.getElementById("handle-keys-dropdown").addEventListener('click', (event) => {    
+document.getElementById("handle-keys-dropdown").addEventListener('click', (event) => {
     const siteContainer = document.getElementsByClassName('side-dropdown-container');
     for (let idx = 0; idx < siteContainer.length; idx++) {
         if (siteContainer[idx].attributes.handle.value == event.target.attributes.id.value) {
@@ -12,52 +12,48 @@ document.getElementById("handle-keys-dropdown").addEventListener('click', (event
                 siteContainer[idx].style.display = "none";
             } else {
                 siteContainer[idx].style.display = "block"
-           }
+            }
         }
     }
 });
 
 
-document.getElementById("handle-users-dropdown").addEventListener('click', (event) => {    
+document.getElementById("handle-users-dropdown").addEventListener('click', (event) => {
     const siteContainer = document.getElementsByClassName('side-dropdown-container');
     for (let idx = 0; idx < siteContainer.length; idx++) {
         if (siteContainer[idx].attributes.handle.value == event.target.attributes.id.value) {
 
-           if (siteContainer[idx].style.display === "block") {
+            if (siteContainer[idx].style.display === "block") {
                 siteContainer[idx].style.display = "none";
-           } else {
+            } else {
                 siteContainer[idx].style.display = "block"
-           }
+            }
         }
     }
 });
 
-document.getElementById("handle-groups-dropdown").addEventListener('click', (event) => {    
+document.getElementById("handle-groups-dropdown").addEventListener('click', (event) => {
     const siteContainer = document.getElementsByClassName('side-dropdown-container');
     for (let idx = 0; idx < siteContainer.length; idx++) {
         if (siteContainer[idx].attributes.handle.value == event.target.attributes.id.value) {
 
-           if (siteContainer[idx].style.display === "block") {
+            if (siteContainer[idx].style.display === "block") {
                 siteContainer[idx].style.display = "none";
-           } else {
+            } else {
                 siteContainer[idx].style.display = "block"
-           }
+            }
         }
     }
 });
 
 
 // ============================= Datatable Config;
-$(document).ready(function () {
-    $('#users-table').DataTable({
-        responsive: true,        
-    });
-});
 
-$(document).ready(function () {
-    $('#group-users-table').DataTable({
-        responsive: true,        
-    });
-});
 
 // ============================= /End Datatable Config;
+
+
+
+// ============================= Users Config;
+
+// ============================= /End Users Config;
